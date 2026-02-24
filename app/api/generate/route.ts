@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { buildSystemPrompt, buildUserPrompt } from '@/lib/prompts';
-import { getHooks, getProblems } from '@/lib/content-loader';
+import { getHooks, getProblems, getPitches } from '@/lib/content-loader';
 import { GenerateRequest } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -32,10 +32,11 @@ export async function POST(request: NextRequest) {
 
     const hooks = getHooks();
     const problems = getProblems();
+    const pitches = getPitches();
 
     const client = new Anthropic({ apiKey });
 
-    const systemPrompt = buildSystemPrompt(hooks, problems);
+    const systemPrompt = buildSystemPrompt(hooks, problems, pitches);
     const userPrompt = buildUserPrompt(contentType, count, problemsPerScript || 1, ctaMode, customCta || '');
 
     const maxTokens = count > 2 ? 4096 : 2048;

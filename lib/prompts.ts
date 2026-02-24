@@ -7,6 +7,10 @@ function getProblemsLabel(n: number): string {
   ).join('\n');
 }
 
+const PITCH_CLOSE_SECTION = `**PITCH/CLOSE** (wrap-up that bridges into the CTA — use a DIFFERENT named close from the Big Fat Pitches doc each time):
+**CLOSE USED:** [EXACT close name from Big Fat Pitches, e.g. "BINARY CHOICE CLOSE", "DESPERATION TO SUCCESS CLOSE", "DIVINE SPARK CLOSE", etc.]
+[Write 1-3 sentences that wrap up the script using the pattern from the named close above. This should feel like a natural bridge — it convinces, then flows right into the CTA. Adapt the close pattern to fit RIVEN and Sean's voice. Don't copy the close verbatim — use its STRUCTURE and STRATEGY.]`;
+
 function buildReelFormat(problemsPerScript: number): string {
   const pLabel = getProblemsLabel(problemsPerScript);
   return `FORMAT: Instagram Reel Script (30-60 seconds spoken)
@@ -16,6 +20,7 @@ Structure EACH script EXACTLY like this:
 ---
 ${pLabel}
 **HOOK USED:** [EXACT ALL-CAPS hook name from the Big Fat Hooks doc]
+**CLOSE USED:** [EXACT ALL-CAPS close name from the Big Fat Pitches doc]
 ---
 
 **HOOK** (first 3 seconds — must stop the scroll):
@@ -28,13 +33,15 @@ ${problemsPerScript > 1 ? '[Address each problem listed above and weave their so
 [Optional Point 4]
 [Optional Point 5]
 
-**CTA** (clear call-to-action):
+${PITCH_CLOSE_SECTION}
+
+**CTA** (call-to-action — flows naturally from the pitch/close):
 [CTA_PLACEHOLDER]
 
 **CAPTION:**
 [Write a caption with relevant hashtags]
 
-Keep it conversational, punchy, and written for spoken delivery. No filler. Every sentence earns its place.`;
+Keep it conversational, punchy, and written for spoken delivery. The pitch/close should feel like a natural wrap-up that makes the CTA feel inevitable, not forced.`;
 }
 
 function buildCarouselFormat(problemsPerScript: number): string {
@@ -46,6 +53,7 @@ Structure EACH script EXACTLY like this:
 ---
 ${pLabel}
 **HOOK USED:** [EXACT ALL-CAPS hook name from the Big Fat Hooks doc]
+**CLOSE USED:** [EXACT ALL-CAPS close name from the Big Fat Pitches doc]
 ---
 
 **SLIDE 1 (Cover):**
@@ -69,6 +77,11 @@ Body: [1-2 sentences max]
 
 [Add slides 6-7 if needed]
 
+**SECOND-TO-LAST SLIDE (PITCH/CLOSE):**
+**CLOSE USED:** [close name]
+Headline: [Convincing wrap-up headline using the close pattern]
+Body: [1-2 sentences that bridge from content to CTA using the named close strategy]
+
 **FINAL SLIDE (CTA):**
 Headline: [Action-oriented CTA headline]
 Body: [CTA_PLACEHOLDER]
@@ -76,7 +89,7 @@ Body: [CTA_PLACEHOLDER]
 **CAPTION:**
 [Write a caption with relevant hashtags]
 
-Each slide should be scannable in 2-3 seconds. Headlines do the heavy lifting.`;
+Each slide should be scannable in 2-3 seconds. The pitch/close slide wraps everything up and makes the CTA slide feel inevitable.`;
 }
 
 function buildStoryFormat(problemsPerScript: number): string {
@@ -88,6 +101,7 @@ Structure EACH script EXACTLY like this:
 ---
 ${pLabel}
 **HOOK USED:** [EXACT ALL-CAPS hook name from the Big Fat Hooks doc]
+**CLOSE USED:** [EXACT ALL-CAPS close name from the Big Fat Pitches doc]
 ---
 
 **FRAME 1** [Type: Text/Poll/Question]:
@@ -103,12 +117,16 @@ ${pLabel}
 **FRAME 4** [Type: Text/Poll/Question]:
 [Content for this frame]
 
-[Add frames 5-7 if needed]
+[Add frames 5-6 if needed]
+
+**SECOND-TO-LAST FRAME** [Type: Text — PITCH/CLOSE]:
+**CLOSE USED:** [close name]
+[Wrap-up text using the named close pattern — bridges into the final CTA frame]
 
 **FINAL FRAME** [Type: CTA]:
 [CTA_PLACEHOLDER]
 
-Mix up frame types — use polls, questions, and text overlays to keep engagement high. Each frame should feel like a natural conversation beat.`;
+Mix up frame types — use polls, questions, and text overlays to keep engagement high. The pitch/close frame should feel like the natural "okay here's what you do" moment before the CTA.`;
 }
 
 function buildTiktokFormat(problemsPerScript: number): string {
@@ -120,6 +138,7 @@ Structure EACH script EXACTLY like this:
 ---
 ${pLabel}
 **HOOK USED:** [EXACT ALL-CAPS hook name from the Big Fat Hooks doc]
+**CLOSE USED:** [EXACT ALL-CAPS close name from the Big Fat Pitches doc]
 ---
 
 **HOOK** (first 1-2 seconds — pattern interrupt):
@@ -130,7 +149,9 @@ ${problemsPerScript > 1 ? '[Address all listed problems and weave their solution
 [Keep sentences short and punchy]
 [Write it like you're talking to a friend]
 
-**CTA / CLOSER:**
+${PITCH_CLOSE_SECTION}
+
+**CTA / CLOSER** (flows from the pitch):
 [CTA_PLACEHOLDER]
 
 **ON-SCREEN TEXT SUGGESTION:**
@@ -139,7 +160,7 @@ ${problemsPerScript > 1 ? '[Address all listed problems and weave their solution
 **CAPTION:**
 [Caption with relevant hashtags]
 
-Write this for Gen Z / millennial delivery. Fast-paced, authentic, zero fluff. TikTok rewards personality — let it come through.`;
+Write this for Gen Z / millennial delivery. Fast-paced, authentic, zero fluff. The pitch/close should land like a gut punch of truth right before the CTA.`;
 }
 
 const formatBuilders: Record<ContentType, (n: number) => string> = {
@@ -151,7 +172,7 @@ const formatBuilders: Record<ContentType, (n: number) => string> = {
 
 const RIVEN_DEFAULT_CTA = `Write a VARIATION of this CTA (don't copy it word-for-word every time — keep the same energy and meaning but switch up the wording naturally): "I have a free guide that'll help you with this — it breaks down exactly what to do step by step. Drop RIVEN in the comments for it."`;
 
-export function buildSystemPrompt(hooks: string, problems: string): string {
+export function buildSystemPrompt(hooks: string, problems: string, pitches: string): string {
   return `You are writing content as Sean — the voice behind RIVEN, a weight loss and wellness brand for Black women ages 25-55.
 
 === SEAN'S VOICE ===
@@ -173,28 +194,38 @@ What he IS: Honest. Warm. A little funny when the moment calls for it. Protectiv
 The undercurrent: "You take care of everybody. Let me handle this part for you."
 === END VOICE ===
 
-You have TWO reference documents:
+You have THREE reference documents:
 
-1. THE BIG FAT HOOKS LIBRARY — 250+ named hook patterns. Each has an ALL-CAPS name ending in "HOOK" (e.g. "HIDDEN CAUSE REVELATION HOOK", "COUNTERINTUITIVE INFORMATION HOOK", "DRAMATIC TRANSFORMATION HOOK", "QUIZ ENGAGEMENT HOOK", "CONSPIRACY IMPLICATION HOOK", "EXPERT SKEPTICISM HOOK", "PAINFUL CONFESSION HOOK", "SCARCITY HOOK", "INTRIGUING QUESTION HOOK", etc.)
+1. THE BIG FAT HOOKS LIBRARY — 250+ named hook patterns. Each has an ALL-CAPS name ending in "HOOK".
 
 2. THE 100 PROBLEMS DOCUMENT — 100 numbered problems RIVEN's clients face, each with 3 pre-built solutions.
+
+3. THE BIG FAT PITCHES / CLOSES LIBRARY — 250+ named close patterns from top-converting sales videos. Each has an ALL-CAPS name ending in "CLOSE" (e.g. "BINARY CHOICE CLOSE", "DESPERATION TO SUCCESS CLOSE", "DIVINE SPARK CLOSE", "SUCCESS CASCADE CLOSE", "DAILY COFFEE CLOSE", "FAMILY LEGACY CLOSE", etc.). These are used to wrap up the script and bridge into the CTA.
 
 === CRITICAL RULES ===
 
 HOOKS — THIS IS NON-NEGOTIABLE:
 - Every script MUST use a DIFFERENT named hook from the Big Fat Hooks library.
-- Use the EXACT ALL-CAPS name as it appears in the document (e.g. "COUNTERINTUITIVE SOLUTION HOOK" not "Counterintuitive Hook").
-- BANNED from overuse: Do NOT use PROBLEM-SOLUTION FORMAT HOOK or FUTURE PACING HOOK more than once per 10 generations. These are lazy defaults. There are 250+ other hooks — USE THEM.
-- Rotate WIDELY. Use revelation hooks, quiz hooks, myth-busting hooks, credibility hooks, transformation hooks, urgency hooks, confession hooks, scarcity hooks, testimonial hooks, conspiracy hooks, intriguing question hooks, etc.
+- Use the EXACT ALL-CAPS name as it appears in the document.
+- BANNED from overuse: Do NOT use PROBLEM-SOLUTION FORMAT HOOK or FUTURE PACING HOOK more than once per 10 generations.
+- Rotate WIDELY across ALL hook types. There are 250+ — use them.
 - NEVER repeat a hook name within the same generation.
 
+PITCHES / CLOSES:
+- Every script MUST use a DIFFERENT named close from the Big Fat Pitches library.
+- Use the EXACT ALL-CAPS close name as it appears in the document.
+- The close/pitch should come RIGHT BEFORE the CTA — it wraps up the content and makes the CTA feel natural and inevitable.
+- Adapt the close PATTERN to RIVEN's context and Sean's voice. Don't copy the close word-for-word — use its strategy and structure.
+- NEVER repeat a close name within the same generation. There are 250+ closes — rotate widely.
+- The pitch/close should feel like it BELONGS in the script — not bolted on. It's Sean wrapping things up in a way that makes you WANT to take action.
+
 PROBLEMS:
-- Reference the problem NUMBER and quote the exact problem text from the doc.
-- Solutions should come from the 3 pre-built solutions listed under that problem.
+- Reference the problem NUMBER and quote the exact problem text.
+- Solutions come from the 3 pre-built solutions under that problem.
 - Pick DIFFERENT problems for each script. Spread randomly across all 100.
 
 VOICE:
-- Write EVERYTHING in Sean's voice. If it sounds like it could come from any brand, it's wrong. It should sound like SEAN.
+- Write EVERYTHING in Sean's voice. If it sounds like any brand could have said it, it's wrong.
 
 === HOOKS REFERENCE LIBRARY ===
 ${hooks}
@@ -202,7 +233,11 @@ ${hooks}
 
 === RIVEN 100 PROBLEMS x 3 SOLUTIONS ===
 ${problems}
-=== END PROBLEMS ===`;
+=== END PROBLEMS ===
+
+=== BIG FAT PITCHES / CLOSES LIBRARY ===
+${pitches}
+=== END PITCHES ===`;
 }
 
 export function buildUserPrompt(
@@ -221,6 +256,7 @@ export function buildUserPrompt(
   const seed = Math.floor(Math.random() * 100);
   const startProblem = (seed % 100) + 1;
   const hookOffset = Math.floor(Math.random() * 250) + 1;
+  const pitchOffset = Math.floor(Math.random() * 250) + 1;
 
   const plural = count > 1 ? 'scripts' : 'script';
   const problemsNote = problemsPerScript > 1
@@ -229,7 +265,7 @@ export function buildUserPrompt(
 
   return `Generate ${count} ${instructions.split('\n')[0].replace('FORMAT: ', '').toLowerCase()} ${plural}.
 
-RANDOMIZATION SEED: Start near problem #${startProblem} and use hooks from around entry #${hookOffset} in the hooks library. Do NOT start from the top of either document.
+RANDOMIZATION SEED: Start near problem #${startProblem}, use hooks from around entry #${hookOffset}, and use closes/pitches from around entry #${pitchOffset}. Do NOT start from the top of any document.
 
 ${problemsNote}
 
@@ -237,13 +273,14 @@ ${instructions}
 
 ${count > 1 ? `IMPORTANT: Generate exactly ${count} separate scripts. REQUIREMENTS:
 - Each script MUST use a COMPLETELY DIFFERENT named hook (different ALL-CAPS hook name). Zero repeats.
+- Each script MUST use a COMPLETELY DIFFERENT named close/pitch (different ALL-CAPS close name). Zero repeats.
 - Each script MUST address DIFFERENT problems (no overlapping problem numbers).
-- Spread your hook choices WIDELY — use hooks from totally different categories.
+- Spread your hook AND close choices WIDELY — use them from totally different categories.
 - Clearly separate each script with:
 
 ===
 
-Number each script (Script 1, Script 2, etc.)` : `Pick ${problemsPerScript} problem${problemsPerScript > 1 ? 's' : ''} starting near #${startProblem} and one SPECIFIC named hook from around entry #${hookOffset} in the Big Fat Hooks library. Use the EXACT ALL-CAPS hook name.`}
+Number each script (Script 1, Script 2, etc.)` : `Pick ${problemsPerScript} problem${problemsPerScript > 1 ? 's' : ''} starting near #${startProblem}, one SPECIFIC named hook from around entry #${hookOffset}, and one SPECIFIC named close from around entry #${pitchOffset}. Use EXACT ALL-CAPS names.`}
 
-Write in Sean's voice. Every word should sound like him — not a brand, not AI, not a coach. A real person who gives a damn.`;
+Write in Sean's voice. The pitch/close should wrap up the script naturally and flow right into the CTA — not feel separate. It's all one conversation.`;
 }
