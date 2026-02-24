@@ -1,0 +1,23 @@
+export type ContentType = 'reel' | 'carousel' | 'story' | 'tiktok';
+
+export type CtaMode = 'riven' | 'custom';
+
+export interface ContentTypeOption {
+  id: ContentType;
+  label: string;
+  description: string;
+  icon: string;
+}
+
+export interface GenerateRequest {
+  contentType: ContentType;
+  count: number;
+  ctaMode: CtaMode;
+  customCta: string;
+  apiKey: string;
+}
+
+export interface GenerateResponse {
+  content: string;
+  error?: string;
+}
