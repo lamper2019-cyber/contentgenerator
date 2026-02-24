@@ -15,6 +15,7 @@ export default function Home() {
   const [output, setOutput] = useState<string | null>(null);
   const [lastContentType, setLastContentType] = useState<ContentType | null>(null);
   const [lastCount, setLastCount] = useState(1);
+  const [lastProblemsPerScript, setLastProblemsPerScript] = useState(1);
   const [lastCtaMode, setLastCtaMode] = useState<CtaMode>('riven');
   const [lastCustomCta, setLastCustomCta] = useState('');
   const [mounted, setMounted] = useState(false);
@@ -34,6 +35,7 @@ export default function Home() {
   const handleGenerate = useCallback(async (
     contentType: ContentType,
     count: number,
+    problemsPerScript: number,
     ctaMode: CtaMode,
     customCta: string
   ) => {
@@ -41,6 +43,7 @@ export default function Home() {
     setError(null);
     setLastContentType(contentType);
     setLastCount(count);
+    setLastProblemsPerScript(problemsPerScript);
     setLastCtaMode(ctaMode);
     setLastCustomCta(customCta);
 
@@ -48,7 +51,7 @@ export default function Home() {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contentType, count, ctaMode, customCta, apiKey }),
+        body: JSON.stringify({ contentType, count, problemsPerScript, ctaMode, customCta, apiKey }),
       });
 
       const data: GenerateResponse = await response.json();
@@ -68,9 +71,9 @@ export default function Home() {
 
   const handleRegenerate = useCallback(() => {
     if (lastContentType) {
-      handleGenerate(lastContentType, lastCount, lastCtaMode, lastCustomCta);
+      handleGenerate(lastContentType, lastCount, lastProblemsPerScript, lastCtaMode, lastCustomCta);
     }
-  }, [lastContentType, lastCount, lastCtaMode, lastCustomCta, handleGenerate]);
+  }, [lastContentType, lastCount, lastProblemsPerScript, lastCtaMode, lastCustomCta, handleGenerate]);
 
   if (!mounted) return null;
 

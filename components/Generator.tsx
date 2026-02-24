@@ -5,13 +5,14 @@ import { contentTypes } from '@/lib/angles';
 import { ContentType, CtaMode } from '@/lib/types';
 
 interface GeneratorProps {
-  onGenerate: (contentType: ContentType, count: number, ctaMode: CtaMode, customCta: string) => void;
+  onGenerate: (contentType: ContentType, count: number, problemsPerScript: number, ctaMode: CtaMode, customCta: string) => void;
   isLoading: boolean;
   hasApiKey: boolean;
   onSettingsClick: () => void;
 }
 
 const countOptions = [1, 2, 3, 4];
+const problemsOptions = [1, 2, 3];
 
 export default function Generator({
   onGenerate,
@@ -21,6 +22,7 @@ export default function Generator({
 }: GeneratorProps) {
   const [selectedType, setSelectedType] = useState<ContentType | null>(null);
   const [count, setCount] = useState(1);
+  const [problemsPerScript, setProblemsPerScript] = useState(1);
   const [ctaMode, setCtaMode] = useState<CtaMode>('riven');
   const [customCta, setCustomCta] = useState('');
 
@@ -28,7 +30,7 @@ export default function Generator({
 
   const handleGenerate = () => {
     if (canGenerate) {
-      onGenerate(selectedType, count, ctaMode, customCta.trim());
+      onGenerate(selectedType, count, problemsPerScript, ctaMode, customCta.trim());
     }
   };
 
@@ -78,6 +80,33 @@ export default function Generator({
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Problems Per Script Selector */}
+      <div>
+        <label className="text-xs font-medium text-muted uppercase tracking-wider">
+          Problems per script
+        </label>
+        <div className="flex gap-2 mt-3">
+          {problemsOptions.map((n) => (
+            <button
+              key={n}
+              onClick={() => setProblemsPerScript(n)}
+              className={`flex-1 py-3 rounded-xl border-2 text-sm font-semibold transition-all ${
+                problemsPerScript === n
+                  ? 'border-accent bg-accent-dim text-foreground'
+                  : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
+              }`}
+            >
+              {n}
+            </button>
+          ))}
+        </div>
+        <p className="text-xs text-muted mt-1.5">
+          {problemsPerScript === 1 && 'One focused problem per script'}
+          {problemsPerScript === 2 && 'Two related problems woven together'}
+          {problemsPerScript === 3 && 'Three problems addressed in one script'}
+        </p>
       </div>
 
       {/* CTA Selector */}

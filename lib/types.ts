@@ -12,6 +12,7 @@ export interface ContentTypeOption {
 export interface GenerateRequest {
   contentType: ContentType;
   count: number;
+  problemsPerScript: number;
   ctaMode: CtaMode;
   customCta: string;
   apiKey: string;
