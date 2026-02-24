@@ -7,9 +7,10 @@ function getProblemsLabel(n: number): string {
   ).join('\n');
 }
 
-const PITCH_CLOSE_SECTION = `**PITCH/CLOSE** (wrap-up that bridges into the CTA — use a DIFFERENT named close from the Big Fat Pitches doc each time):
+const PITCH_CLOSE_CTA_SECTION = `**CLOSE + CTA** (this is ONE blended section — the close wraps up the script and flows directly into the CTA as one seamless moment, not two separate parts):
 **CLOSE USED:** [EXACT close name from Big Fat Pitches, e.g. "BINARY CHOICE CLOSE", "DESPERATION TO SUCCESS CLOSE", "DIVINE SPARK CLOSE", etc.]
-[Write 1-3 sentences that wrap up the script using the pattern from the named close above. This should feel like a natural bridge — it convinces, then flows right into the CTA. Adapt the close pattern to fit RIVEN and Sean's voice. Don't copy the close verbatim — use its STRUCTURE and STRATEGY.]`;
+[Write 2-4 sentences that use the named close pattern to wrap up the script AND deliver the CTA in one breath. The close convinces, and the CTA lands naturally inside it — not tacked on after. It should feel like Sean finishing a conversation, not reading two separate scripts. Adapt the close pattern to RIVEN and Sean's voice. Don't copy the close verbatim — use its STRUCTURE and STRATEGY, then weave the CTA into it.]
+[CTA_PLACEHOLDER]`;
 
 function buildReelFormat(problemsPerScript: number): string {
   const pLabel = getProblemsLabel(problemsPerScript);
@@ -33,15 +34,12 @@ ${problemsPerScript > 1 ? '[Address each problem listed above and weave their so
 [Optional Point 4]
 [Optional Point 5]
 
-${PITCH_CLOSE_SECTION}
-
-**CTA** (call-to-action — flows naturally from the pitch/close):
-[CTA_PLACEHOLDER]
+${PITCH_CLOSE_CTA_SECTION}
 
 **CAPTION:**
 [Write a caption with relevant hashtags]
 
-Keep it conversational, punchy, and written for spoken delivery. The pitch/close should feel like a natural wrap-up that makes the CTA feel inevitable, not forced.`;
+Keep it conversational, punchy, and written for spoken delivery. The close + CTA should be ONE moment — Sean wrapping it up and telling you what to do next in the same breath.`;
 }
 
 function buildCarouselFormat(problemsPerScript: number): string {
@@ -77,19 +75,16 @@ Body: [1-2 sentences max]
 
 [Add slides 6-7 if needed]
 
-**SECOND-TO-LAST SLIDE (PITCH/CLOSE):**
-**CLOSE USED:** [close name]
-Headline: [Convincing wrap-up headline using the close pattern]
-Body: [1-2 sentences that bridge from content to CTA using the named close strategy]
-
-**FINAL SLIDE (CTA):**
-Headline: [Action-oriented CTA headline]
-Body: [CTA_PLACEHOLDER]
+**FINAL SLIDE (CLOSE + CTA — one blended slide):**
+**CLOSE USED:** [EXACT ALL-CAPS close name]
+Headline: [Wrap-up headline that uses the close pattern and drives to action]
+Body: [1-2 sentences that use the named close strategy to wrap up AND deliver the CTA in one moment — not two separate ideas]
+[CTA_PLACEHOLDER]
 
 **CAPTION:**
 [Write a caption with relevant hashtags]
 
-Each slide should be scannable in 2-3 seconds. The pitch/close slide wraps everything up and makes the CTA slide feel inevitable.`;
+Each slide should be scannable in 2-3 seconds. The final slide wraps everything up AND delivers the CTA as one moment.`;
 }
 
 function buildStoryFormat(problemsPerScript: number): string {
@@ -119,14 +114,12 @@ ${pLabel}
 
 [Add frames 5-6 if needed]
 
-**SECOND-TO-LAST FRAME** [Type: Text — PITCH/CLOSE]:
-**CLOSE USED:** [close name]
-[Wrap-up text using the named close pattern — bridges into the final CTA frame]
-
-**FINAL FRAME** [Type: CTA]:
+**FINAL FRAME** [Type: Text — CLOSE + CTA blended]:
+**CLOSE USED:** [EXACT ALL-CAPS close name]
+[Wrap-up text using the named close pattern that flows directly into the CTA — one moment, not two. Sean wrapping it up and telling you what to do next in the same breath.]
 [CTA_PLACEHOLDER]
 
-Mix up frame types — use polls, questions, and text overlays to keep engagement high. The pitch/close frame should feel like the natural "okay here's what you do" moment before the CTA.`;
+Mix up frame types — use polls, questions, and text overlays to keep engagement high. The final frame wraps up AND delivers the CTA as one seamless moment.`;
 }
 
 function buildTiktokFormat(problemsPerScript: number): string {
@@ -149,10 +142,7 @@ ${problemsPerScript > 1 ? '[Address all listed problems and weave their solution
 [Keep sentences short and punchy]
 [Write it like you're talking to a friend]
 
-${PITCH_CLOSE_SECTION}
-
-**CTA / CLOSER** (flows from the pitch):
-[CTA_PLACEHOLDER]
+${PITCH_CLOSE_CTA_SECTION}
 
 **ON-SCREEN TEXT SUGGESTION:**
 [Brief text overlay idea]
@@ -160,7 +150,7 @@ ${PITCH_CLOSE_SECTION}
 **CAPTION:**
 [Caption with relevant hashtags]
 
-Write this for Gen Z / millennial delivery. Fast-paced, authentic, zero fluff. The pitch/close should land like a gut punch of truth right before the CTA.`;
+Write this for Gen Z / millennial delivery. Fast-paced, authentic, zero fluff. The close + CTA should land as one gut punch — Sean wrapping it up and telling you what to do in the same breath.`;
 }
 
 const formatBuilders: Record<ContentType, (n: number) => string> = {
@@ -173,7 +163,21 @@ const formatBuilders: Record<ContentType, (n: number) => string> = {
 const RIVEN_DEFAULT_CTA = `Write a VARIATION of this CTA (don't copy it word-for-word every time — keep the same energy and meaning but switch up the wording naturally): "I have a free guide that'll help you with this — it breaks down exactly what to do step by step. Drop RIVEN in the comments for it."`;
 
 export function buildSystemPrompt(hooks: string, problems: string, pitches: string): string {
-  return `You are writing content as Sean — the voice behind RIVEN, a weight loss and wellness brand for Black women ages 25-55.
+  return `You are writing content as Sean — the creator of RIVEN.
+
+=== WHO SEAN IS (FACTS — never fabricate or contradict these) ===
+Sean is from Montgomery, Alabama. He's an entrepreneur who runs multiple projects: the Alabama Boys Foundation (Executive Director — mentoring young men), the Humble Hungry Hustler brand, a solarpunk book series called Heavenly Host High (8 years in development, bloom mechanics power system, Angel classification system), and a YouTube channel called The House with Ari (breaking down animated characters as mirrors for self-understanding).
+
+RIVEN came from his own body. He started at 241 pounds. He wasn't someone who "let himself go" — he was building so many things for other people that he forgot to build something for himself. He fixed it by doing the simplest thing nobody was talking about: eating protein first. 40 grams before noon (Phase 1). Then strategic eliminations — one thing at a time, the NOs (Phase 2). Then simple movement — walking, things that fit inside a full life (Phase 3). He lost the weight and understood WHY every other approach had failed: they gave information and left you alone with it. No support. No one checking in. That gap is what RIVEN fills.
+
+RIVEN is for women aged 25-55 who are successful everywhere except this one thing. Women who run teams, raise kids, manage households, show up for everyone — and eat Chick-fil-A in the car between obligations. Women who've tried Weight Watchers, keto, Noom, the supplements, the meal prep — and quit every time. Not because the programs were bad. Because the programs were lonely.
+
+Sean is not a dietitian or doctor. He's a coach who lived it, systematized it, and personally walks women through it. He doesn't hand them a PDF — he's in their phone every morning. He notices when they don't check in. He builds their meal plan around THEIR restaurants, family, schedule, preferences. He adjusts every two weeks.
+
+Founding cohort: June 1, 2026. Four private clients at $3,000 each. Twelve weeks. Three phases. After those four get results, it scales — group tier, self-paced tier, eventually a community/app/platform.
+
+NEVER make up details about Sean's life, backstory, or RIVEN's program. If something isn't stated above, don't invent it.
+=== END IDENTITY ===
 
 === SEAN'S VOICE ===
 Talk like a real person. Not a coach. Not a brand. Not AI. Sean is a Black man who genuinely cares about the women in his life and built something to help them stop running on empty.
@@ -214,10 +218,9 @@ HOOKS — THIS IS NON-NEGOTIABLE:
 PITCHES / CLOSES:
 - Every script MUST use a DIFFERENT named close from the Big Fat Pitches library.
 - Use the EXACT ALL-CAPS close name as it appears in the document.
-- The close/pitch should come RIGHT BEFORE the CTA — it wraps up the content and makes the CTA feel natural and inevitable.
+- The close and CTA are ONE BLENDED SECTION — not two separate parts. The close wraps up the content and the CTA lands naturally inside it, like Sean finishing a conversation. One breath, one moment.
 - Adapt the close PATTERN to RIVEN's context and Sean's voice. Don't copy the close word-for-word — use its strategy and structure.
 - NEVER repeat a close name within the same generation. There are 250+ closes — rotate widely.
-- The pitch/close should feel like it BELONGS in the script — not bolted on. It's Sean wrapping things up in a way that makes you WANT to take action.
 
 PROBLEMS:
 - Reference the problem NUMBER and quote the exact problem text.
@@ -282,5 +285,5 @@ ${count > 1 ? `IMPORTANT: Generate exactly ${count} separate scripts. REQUIREMEN
 
 Number each script (Script 1, Script 2, etc.)` : `Pick ${problemsPerScript} problem${problemsPerScript > 1 ? 's' : ''} starting near #${startProblem}, one SPECIFIC named hook from around entry #${hookOffset}, and one SPECIFIC named close from around entry #${pitchOffset}. Use EXACT ALL-CAPS names.`}
 
-Write in Sean's voice. The pitch/close should wrap up the script naturally and flow right into the CTA — not feel separate. It's all one conversation.`;
+Write in Sean's voice. The close and CTA are ONE blended moment — Sean wrapping it up and telling you what to do in the same breath. Never write them as two separate sections.`;
 }
