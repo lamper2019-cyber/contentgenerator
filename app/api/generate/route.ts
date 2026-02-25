@@ -7,7 +7,7 @@ import { GenerateRequest } from '@/lib/types';
 export async function POST(request: NextRequest) {
   try {
     const body: GenerateRequest = await request.json();
-    const { contentType, count, problemsPerScript, ctaMode, customCta, apiKey } = body;
+    const { contentType, count, problemsPerScript, toneMode, ctaMode, customCta, apiKey } = body;
 
     if (!apiKey) {
       return NextResponse.json(
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     const client = new Anthropic({ apiKey });
 
     const systemPrompt = buildSystemPrompt(hooks, problems, pitches);
-    const userPrompt = buildUserPrompt(contentType, count, problemsPerScript || 1, ctaMode, customCta || '');
+    const userPrompt = buildUserPrompt(contentType, count, problemsPerScript || 1, toneMode || 'tactical', ctaMode, customCta || '');
 
     const maxTokens = count > 2 ? 4096 : 2048;
 

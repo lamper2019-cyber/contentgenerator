@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Generator from '@/components/Generator';
 import OutputCard from '@/components/OutputCard';
 import SettingsModal from '@/components/SettingsModal';
-import { ContentType, CtaMode, GenerateResponse } from '@/lib/types';
+import { ContentType, CtaMode, ToneMode, GenerateResponse } from '@/lib/types';
 
 export default function Home() {
   const [apiKey, setApiKey] = useState('');
@@ -16,6 +16,7 @@ export default function Home() {
   const [lastContentType, setLastContentType] = useState<ContentType | null>(null);
   const [lastCount, setLastCount] = useState(1);
   const [lastProblemsPerScript, setLastProblemsPerScript] = useState(1);
+  const [lastToneMode, setLastToneMode] = useState<ToneMode>('tactical');
   const [lastCtaMode, setLastCtaMode] = useState<CtaMode>('riven');
   const [lastCustomCta, setLastCustomCta] = useState('');
   const [mounted, setMounted] = useState(false);
@@ -36,6 +37,7 @@ export default function Home() {
     contentType: ContentType,
     count: number,
     problemsPerScript: number,
+    toneMode: ToneMode,
     ctaMode: CtaMode,
     customCta: string
   ) => {
@@ -44,6 +46,7 @@ export default function Home() {
     setLastContentType(contentType);
     setLastCount(count);
     setLastProblemsPerScript(problemsPerScript);
+    setLastToneMode(toneMode);
     setLastCtaMode(ctaMode);
     setLastCustomCta(customCta);
 
@@ -51,7 +54,7 @@ export default function Home() {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contentType, count, problemsPerScript, ctaMode, customCta, apiKey }),
+        body: JSON.stringify({ contentType, count, problemsPerScript, toneMode, ctaMode, customCta, apiKey }),
       });
 
       const data: GenerateResponse = await response.json();
@@ -71,9 +74,9 @@ export default function Home() {
 
   const handleRegenerate = useCallback(() => {
     if (lastContentType) {
-      handleGenerate(lastContentType, lastCount, lastProblemsPerScript, lastCtaMode, lastCustomCta);
+      handleGenerate(lastContentType, lastCount, lastProblemsPerScript, lastToneMode, lastCtaMode, lastCustomCta);
     }
-  }, [lastContentType, lastCount, lastProblemsPerScript, lastCtaMode, lastCustomCta, handleGenerate]);
+  }, [lastContentType, lastCount, lastProblemsPerScript, lastToneMode, lastCtaMode, lastCustomCta, handleGenerate]);
 
   if (!mounted) return null;
 

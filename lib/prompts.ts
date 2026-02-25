@@ -1,4 +1,4 @@
-import { ContentType, CtaMode } from './types';
+import { ContentType, CtaMode, ToneMode } from './types';
 
 function getProblemsLabel(n: number): string {
   if (n === 1) return `**PROBLEM ADDRESSED:** Problem #[number] — "[quote the problem text]"`;
@@ -243,10 +243,29 @@ ${pitches}
 === END PITCHES ===`;
 }
 
+const TONE_INSTRUCTIONS: Record<ToneMode, string> = {
+  tactical: `TONE: TACTICAL / PRACTICAL
+- Lead with actionable advice, specific steps, and "do this" energy.
+- The script should feel like Sean giving her a concrete game plan she can use TODAY.
+- Focus on the HOW — specific actions, habits, swaps, routines.
+- Use phrases like "here's what you do," "try this," "the move is," "step one is."
+- Solutions should feel tangible — not abstract. She should be able to act on it immediately.
+- Still Sean's voice — warm and direct — but the emphasis is on GIVING HER SOMETHING TO DO.`,
+
+  emotional: `TONE: EMOTIONAL / IDENTITY-BASED
+- Lead with how she FEELS and who she's BECOMING — not just what to do.
+- The script should feel like Sean seeing her, naming what she's going through, and reminding her who she really is.
+- Focus on the WHY — identity, self-worth, the gap between who she is and how she's been living.
+- Use phrases like "you already know," "that's not you," "you're not the woman who," "imagine waking up and."
+- Tap into the frustration, the exhaustion, the "I'm tired of starting over" feeling — then shift it to possibility.
+- Still Sean's voice — warm and honest — but the emphasis is on MAKING HER FEEL SOMETHING.`,
+};
+
 export function buildUserPrompt(
   contentType: ContentType,
   count: number,
   problemsPerScript: number,
+  toneMode: ToneMode,
   ctaMode: CtaMode,
   customCta: string
 ): string {
@@ -266,7 +285,11 @@ export function buildUserPrompt(
     ? `Each script should address ${problemsPerScript} DIFFERENT problems from the 100 problems doc and weave their solutions together into one cohesive script.`
     : `Each script should address 1 problem from the 100 problems doc.`;
 
+  const toneBlock = TONE_INSTRUCTIONS[toneMode];
+
   return `Generate ${count} ${instructions.split('\n')[0].replace('FORMAT: ', '').toLowerCase()} ${plural}.
+
+${toneBlock}
 
 RANDOMIZATION SEED: Start near problem #${startProblem}, use hooks from around entry #${hookOffset}, and use closes/pitches from around entry #${pitchOffset}. Do NOT start from the top of any document.
 

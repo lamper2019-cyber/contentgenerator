@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { contentTypes } from '@/lib/angles';
-import { ContentType, CtaMode } from '@/lib/types';
+import { ContentType, CtaMode, ToneMode } from '@/lib/types';
 
 interface GeneratorProps {
-  onGenerate: (contentType: ContentType, count: number, problemsPerScript: number, ctaMode: CtaMode, customCta: string) => void;
+  onGenerate: (contentType: ContentType, count: number, problemsPerScript: number, toneMode: ToneMode, ctaMode: CtaMode, customCta: string) => void;
   isLoading: boolean;
   hasApiKey: boolean;
   onSettingsClick: () => void;
@@ -23,6 +23,7 @@ export default function Generator({
   const [selectedType, setSelectedType] = useState<ContentType | null>(null);
   const [count, setCount] = useState(1);
   const [problemsPerScript, setProblemsPerScript] = useState(1);
+  const [toneMode, setToneMode] = useState<ToneMode>('tactical');
   const [ctaMode, setCtaMode] = useState<CtaMode>('riven');
   const [customCta, setCustomCta] = useState('');
 
@@ -30,7 +31,7 @@ export default function Generator({
 
   const handleGenerate = () => {
     if (canGenerate) {
-      onGenerate(selectedType, count, problemsPerScript, ctaMode, customCta.trim());
+      onGenerate(selectedType, count, problemsPerScript, toneMode, ctaMode, customCta.trim());
     }
   };
 
@@ -107,6 +108,37 @@ export default function Generator({
           {problemsPerScript === 2 && 'Two related problems woven together'}
           {problemsPerScript === 3 && 'Three problems addressed in one script'}
         </p>
+      </div>
+
+      {/* Tone Selector */}
+      <div>
+        <label className="text-xs font-medium text-muted uppercase tracking-wider">
+          Script Tone
+        </label>
+        <div className="flex gap-2 mt-3">
+          <button
+            onClick={() => setToneMode('tactical')}
+            className={`flex-1 p-3 rounded-xl border-2 text-left transition-all ${
+              toneMode === 'tactical'
+                ? 'border-accent bg-accent-dim text-foreground'
+                : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
+            }`}
+          >
+            <span className="text-sm font-semibold block">🎯 Tactical</span>
+            <span className="text-xs text-muted block mt-0.5">Practical tips & action steps</span>
+          </button>
+          <button
+            onClick={() => setToneMode('emotional')}
+            className={`flex-1 p-3 rounded-xl border-2 text-left transition-all ${
+              toneMode === 'emotional'
+                ? 'border-accent bg-accent-dim text-foreground'
+                : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
+            }`}
+          >
+            <span className="text-sm font-semibold block">💜 Emotional</span>
+            <span className="text-xs text-muted block mt-0.5">Identity-based & feeling-driven</span>
+          </button>
+        </div>
       </div>
 
       {/* CTA Selector */}
