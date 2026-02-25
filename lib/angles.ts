@@ -20,9 +20,9 @@ export const contentTypes: ContentTypeOption[] = [
     icon: '📱',
   },
   {
-    id: 'tiktok',
-    label: 'TikTok Script',
-    description: 'TikTok video script (15-60s)',
-    icon: '🎵',
+    id: 'drop',
+    label: 'Drop of the Day',
+    description: 'Quick drop — a line or two that hits',
+    icon: '💧',
   },
 ];

@@ -122,42 +122,37 @@ ${pLabel}
 Mix up frame types — use polls, questions, and text overlays to keep engagement high. The final frame wraps up AND delivers the CTA as one seamless moment.`;
 }
 
-function buildTiktokFormat(problemsPerScript: number): string {
+function buildDropFormat(problemsPerScript: number): string {
   const pLabel = getProblemsLabel(problemsPerScript);
-  return `FORMAT: TikTok Script (15-60 seconds)
+  return `FORMAT: Drop of the Day (1-3 sentences — short, fast, valuable)
 
-Structure EACH script EXACTLY like this:
+A "drop" is Sean's signature micro-content format. It's quick. It's one thought that hits. It could be a protein tip, a real talk moment, a meal idea, a mindset shift. Not an essay. Not a lecture. Just a drop — something you say and keep moving.
+
+Think: "Monday drop," "quick drop for today," "here's your drop." It's Sean's thing. The audience knows what a drop is. Short, punchy, valuable.
+
+Types of drops: protein drop, real talk drop, meal drop, mindset drop, habit drop, truth drop.
+
+Structure EACH drop EXACTLY like this:
 
 ---
 ${pLabel}
 **HOOK USED:** [EXACT ALL-CAPS hook name from the Big Fat Hooks doc]
 **CLOSE USED:** [EXACT ALL-CAPS close name from the Big Fat Pitches doc]
+**DROP TYPE:** [protein drop / real talk drop / meal drop / mindset drop / habit drop / truth drop]
 ---
 
-**HOOK** (first 1-2 seconds — pattern interrupt):
-[Write the opening hook using the named hook pattern, adapted for RIVEN's audience]
-
-**BODY** (rapid-fire, conversational):
-${problemsPerScript > 1 ? '[Address all listed problems and weave their solutions together naturally]' : '[Address the problem, deliver the solution]'}
-[Keep sentences short and punchy]
-[Write it like you're talking to a friend]
-
+**THE DROP:**
+[1-3 sentences MAX. That's it. Address the problem, deliver the value, and if there's a close+CTA it's woven into the same breath. This should feel like Sean texting you something real — not writing a script. Quick, honest, done.]
 ${PITCH_CLOSE_CTA_SECTION}
 
-**ON-SCREEN TEXT SUGGESTION:**
-[Brief text overlay idea]
-
-**CAPTION:**
-[Caption with relevant hashtags]
-
-Write this for Gen Z / millennial delivery. Fast-paced, authentic, zero fluff. The close + CTA should land as one gut punch — Sean wrapping it up and telling you what to do in the same breath.`;
+Keep it SHORT. A drop is 1-3 sentences. If it's longer than that, it's not a drop. Sean asks himself one question: "what's my drop today?" — and this is the answer. No fluff, no buildup, no filler. Just the drop.`;
 }
 
 const formatBuilders: Record<ContentType, (n: number) => string> = {
   reel: buildReelFormat,
   carousel: buildCarouselFormat,
   story: buildStoryFormat,
-  tiktok: buildTiktokFormat,
+  drop: buildDropFormat,
 };
 
 const RIVEN_DEFAULT_CTA = `Write a VARIATION of this CTA (don't copy it word-for-word every time — keep the same energy and meaning but switch up the wording naturally): "I have a free guide that'll help you with this — it breaks down exactly what to do step by step. Drop RIVEN in the comments for it."`;

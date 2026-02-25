@@ -1,4 +1,4 @@
-export type ContentType = 'reel' | 'carousel' | 'story' | 'tiktok';
+export type ContentType = 'reel' | 'carousel' | 'story' | 'drop';
 
 export type CtaMode = 'riven' | 'custom';
 
