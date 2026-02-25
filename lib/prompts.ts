@@ -124,28 +124,32 @@ Mix up frame types — use polls, questions, and text overlays to keep engagemen
 
 function buildDropFormat(problemsPerScript: number): string {
   const pLabel = getProblemsLabel(problemsPerScript);
-  return `FORMAT: Drop of the Day (1-3 sentences — short, fast, valuable)
+  return `FORMAT: Drop of the Day (25 WORDS OR LESS — no CTA, no close)
 
-A "drop" is Sean's signature micro-content format. It's quick. It's one thought that hits. It could be a protein tip, a real talk moment, a meal idea, a mindset shift. Not an essay. Not a lecture. Just a drop — something you say and keep moving.
+A "drop" is Sean's signature micro-content format. One thought that hits. A protein tip, a real talk moment, a meal idea, a mindset shift. Not an essay. Not a lecture. Just a drop — something you say and keep moving.
 
-Think: "Monday drop," "quick drop for today," "here's your drop." It's Sean's thing. The audience knows what a drop is. Short, punchy, valuable.
+Think: "Monday drop," "quick drop for today," "here's your drop." Short, punchy, valuable.
 
 Types of drops: protein drop, real talk drop, meal drop, mindset drop, habit drop, truth drop.
+
+CRITICAL RULES FOR DROPS:
+- 25 WORDS OR LESS. Count them. If it's over 25 words, cut it down.
+- NO CTA. No "drop RIVEN in the comments." No call to action at all. Just the drop.
+- NO CLOSE. No pitch, no wrap-up, no close pattern. Just the drop.
+- It should feel like Sean texting you one thing that matters today.
 
 Structure EACH drop EXACTLY like this:
 
 ---
 ${pLabel}
 **HOOK USED:** [EXACT ALL-CAPS hook name from the Big Fat Hooks doc]
-**CLOSE USED:** [EXACT ALL-CAPS close name from the Big Fat Pitches doc]
 **DROP TYPE:** [protein drop / real talk drop / meal drop / mindset drop / habit drop / truth drop]
 ---
 
 **THE DROP:**
-[1-3 sentences MAX. That's it. Address the problem, deliver the value, and if there's a close+CTA it's woven into the same breath. This should feel like Sean texting you something real — not writing a script. Quick, honest, done.]
-${PITCH_CLOSE_CTA_SECTION}
+[25 words or less. One thought. That's it. Done.]
 
-Keep it SHORT. A drop is 1-3 sentences. If it's longer than that, it's not a drop. Sean asks himself one question: "what's my drop today?" — and this is the answer. No fluff, no buildup, no filler. Just the drop.`;
+No CTA. No close. No caption. Just the drop.`;
 }
 
 const formatBuilders: Record<ContentType, (n: number) => string> = {

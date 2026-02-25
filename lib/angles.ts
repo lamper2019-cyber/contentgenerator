@@ -22,7 +22,7 @@ export const contentTypes: ContentTypeOption[] = [
   {
     id: 'drop',
     label: 'Drop of the Day',
-    description: 'Quick drop — a line or two that hits',
-    icon: '💧',
+    description: 'Quick drop — 25 words or less that hit',
+    icon: '✨',
   },
 ];
