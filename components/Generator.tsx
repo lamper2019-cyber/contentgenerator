@@ -1,18 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { contentTypes } from '@/lib/angles';
-import { ContentType, CtaMode, ToneMode } from '@/lib/types';
+import { drivers, pillars } from '@/lib/angles';
+import { Driver, Pillar } from '@/lib/types';
 
 interface GeneratorProps {
-  onGenerate: (contentType: ContentType, count: number, problemsPerScript: number, toneMode: ToneMode, ctaMode: CtaMode, customCta: string) => void;
+  onGenerate: (driver: Driver, pillar: Pillar, count: number) => void;
   isLoading: boolean;
   hasApiKey: boolean;
   onSettingsClick: () => void;
 }
 
 const countOptions = [1, 2, 3, 4];
-const problemsOptions = [1, 2, 3];
 
 export default function Generator({
   onGenerate,
@@ -20,42 +19,63 @@ export default function Generator({
   hasApiKey,
   onSettingsClick,
 }: GeneratorProps) {
-  const [selectedType, setSelectedType] = useState<ContentType | null>(null);
+  const [selectedDriver, setSelectedDriver] = useState<Driver | null>(null);
+  const [selectedPillar, setSelectedPillar] = useState<Pillar | null>(null);
   const [count, setCount] = useState(1);
-  const [problemsPerScript, setProblemsPerScript] = useState(1);
-  const [toneMode, setToneMode] = useState<ToneMode>('tactical');
-  const [ctaMode, setCtaMode] = useState<CtaMode>('riven');
-  const [customCta, setCustomCta] = useState('');
 
-  const canGenerate = selectedType && hasApiKey && !isLoading && (ctaMode === 'riven' || customCta.trim().length > 0);
+  const canGenerate = selectedDriver && selectedPillar && hasApiKey && !isLoading;
 
   const handleGenerate = () => {
     if (canGenerate) {
-      onGenerate(selectedType, count, problemsPerScript, toneMode, ctaMode, customCta.trim());
+      onGenerate(selectedDriver, selectedPillar, count);
     }
   };
 
   return (
     <div className="flex flex-col gap-6 p-4">
-      {/* Content Type Selector */}
+      {/* Driver Selector */}
       <div>
         <label className="text-xs font-medium text-muted uppercase tracking-wider">
-          What are you creating?
+          Driver — What&apos;s the goal?
         </label>
         <div className="grid grid-cols-2 gap-3 mt-3">
-          {contentTypes.map((type) => (
+          {drivers.map((d) => (
             <button
-              key={type.id}
-              onClick={() => setSelectedType(type.id)}
+              key={d.id}
+              onClick={() => setSelectedDriver(d.id)}
               className={`text-left p-4 rounded-xl border-2 transition-all ${
-                selectedType === type.id
+                selectedDriver === d.id
                   ? 'border-accent bg-accent-dim text-foreground scale-[1.02]'
                   : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
               }`}
             >
-              <span className="text-2xl block mb-1">{type.icon}</span>
-              <span className="text-sm font-semibold block">{type.label}</span>
-              <span className="text-xs text-muted block mt-0.5">{type.description}</span>
+              <span className="text-2xl block mb-1">{d.icon}</span>
+              <span className="text-sm font-semibold block">{d.label}</span>
+              <span className="text-xs text-muted block mt-0.5">{d.description}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Pillar Selector */}
+      <div>
+        <label className="text-xs font-medium text-muted uppercase tracking-wider">
+          Pillar — What&apos;s it about?
+        </label>
+        <div className="grid grid-cols-2 gap-3 mt-3">
+          {pillars.map((p) => (
+            <button
+              key={p.id}
+              onClick={() => setSelectedPillar(p.id)}
+              className={`text-left p-4 rounded-xl border-2 transition-all ${
+                selectedPillar === p.id
+                  ? 'border-accent bg-accent-dim text-foreground scale-[1.02]'
+                  : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
+              }`}
+            >
+              <span className="text-2xl block mb-1">{p.icon}</span>
+              <span className="text-sm font-semibold block">{p.label}</span>
+              <span className="text-xs text-muted block mt-0.5">{p.description}</span>
             </button>
           ))}
         </div>
@@ -81,112 +101,6 @@ export default function Generator({
             </button>
           ))}
         </div>
-      </div>
-
-      {/* Problems Per Script Selector */}
-      <div>
-        <label className="text-xs font-medium text-muted uppercase tracking-wider">
-          Problems per script
-        </label>
-        <div className="flex gap-2 mt-3">
-          {problemsOptions.map((n) => (
-            <button
-              key={n}
-              onClick={() => setProblemsPerScript(n)}
-              className={`flex-1 py-3 rounded-xl border-2 text-sm font-semibold transition-all ${
-                problemsPerScript === n
-                  ? 'border-accent bg-accent-dim text-foreground'
-                  : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
-              }`}
-            >
-              {n}
-            </button>
-          ))}
-        </div>
-        <p className="text-xs text-muted mt-1.5">
-          {problemsPerScript === 1 && 'One focused problem per script'}
-          {problemsPerScript === 2 && 'Two related problems woven together'}
-          {problemsPerScript === 3 && 'Three problems addressed in one script'}
-        </p>
-      </div>
-
-      {/* Tone Selector */}
-      <div>
-        <label className="text-xs font-medium text-muted uppercase tracking-wider">
-          Script Tone
-        </label>
-        <div className="flex gap-2 mt-3">
-          <button
-            onClick={() => setToneMode('tactical')}
-            className={`flex-1 p-3 rounded-xl border-2 text-left transition-all ${
-              toneMode === 'tactical'
-                ? 'border-accent bg-accent-dim text-foreground'
-                : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
-            }`}
-          >
-            <span className="text-sm font-semibold block">🎯 Tactical</span>
-            <span className="text-xs text-muted block mt-0.5">Practical tips & action steps</span>
-          </button>
-          <button
-            onClick={() => setToneMode('emotional')}
-            className={`flex-1 p-3 rounded-xl border-2 text-left transition-all ${
-              toneMode === 'emotional'
-                ? 'border-accent bg-accent-dim text-foreground'
-                : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
-            }`}
-          >
-            <span className="text-sm font-semibold block">💜 Emotional</span>
-            <span className="text-xs text-muted block mt-0.5">Identity-based & feeling-driven</span>
-          </button>
-        </div>
-      </div>
-
-      {/* CTA Selector */}
-      <div>
-        <label className="text-xs font-medium text-muted uppercase tracking-wider">
-          Call to Action
-        </label>
-        <div className="flex gap-2 mt-3">
-          <button
-            onClick={() => setCtaMode('riven')}
-            className={`flex-1 p-3 rounded-xl border-2 text-left transition-all ${
-              ctaMode === 'riven'
-                ? 'border-accent bg-accent-dim text-foreground'
-                : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
-            }`}
-          >
-            <span className="text-sm font-semibold block">RIVEN CTA</span>
-            <span className="text-xs text-muted block mt-0.5">Free guide offer</span>
-          </button>
-          <button
-            onClick={() => setCtaMode('custom')}
-            className={`flex-1 p-3 rounded-xl border-2 text-left transition-all ${
-              ctaMode === 'custom'
-                ? 'border-accent bg-accent-dim text-foreground'
-                : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
-            }`}
-          >
-            <span className="text-sm font-semibold block">Custom CTA</span>
-            <span className="text-xs text-muted block mt-0.5">Paste your own</span>
-          </button>
-        </div>
-
-        {/* RIVEN CTA Preview */}
-        {ctaMode === 'riven' && (
-          <div className="mt-3 p-3 rounded-lg bg-surface border border-border text-xs text-muted leading-relaxed">
-            Variations of: &ldquo;I have a free guide that&apos;ll help you with this — it breaks down exactly what to do step by step. Drop RIVEN in the comments for it.&rdquo;
-          </div>
-        )}
-
-        {/* Custom CTA Input */}
-        {ctaMode === 'custom' && (
-          <textarea
-            value={customCta}
-            onChange={(e) => setCustomCta(e.target.value)}
-            placeholder="Paste your CTA here... e.g. 'Link in bio to book your free consultation' or 'Use code RIVEN20 for 20% off'"
-            className="w-full mt-3 px-4 py-3 bg-surface border border-border rounded-lg text-sm text-foreground placeholder:text-muted/50 focus:border-accent transition-colors resize-none h-24"
-          />
-        )}
       </div>
 
       {/* Generate Button */}

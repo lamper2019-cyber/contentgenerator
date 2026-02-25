@@ -7,7 +7,7 @@ import { GenerateRequest } from '@/lib/types';
 export async function POST(request: NextRequest) {
   try {
     const body: GenerateRequest = await request.json();
-    const { contentType, count, problemsPerScript, toneMode, ctaMode, customCta, apiKey } = body;
+    const { driver, pillar, count, apiKey } = body;
 
     if (!apiKey) {
       return NextResponse.json(
@@ -16,16 +16,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!contentType || !count) {
+    if (!driver || !pillar || !count) {
       return NextResponse.json(
-        { error: 'Content type and count are required.' },
-        { status: 400 }
-      );
-    }
-
-    if (ctaMode === 'custom' && (!customCta || customCta.trim().length === 0)) {
-      return NextResponse.json(
-        { error: 'Custom CTA text is required when using custom CTA mode.' },
+        { error: 'Driver, pillar, and count are required.' },
         { status: 400 }
       );
     }
@@ -37,7 +30,7 @@ export async function POST(request: NextRequest) {
     const client = new Anthropic({ apiKey });
 
     const systemPrompt = buildSystemPrompt(hooks, problems, pitches);
-    const userPrompt = buildUserPrompt(contentType, count, problemsPerScript || 1, toneMode || 'tactical', ctaMode, customCta || '');
+    const userPrompt = buildUserPrompt(driver, pillar, count);
 
     const maxTokens = count > 2 ? 4096 : 2048;
 

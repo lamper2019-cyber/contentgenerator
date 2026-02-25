@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { ContentType } from '@/lib/types';
-import { contentTypes } from '@/lib/angles';
+import { Driver, Pillar } from '@/lib/types';
+import { drivers, pillars } from '@/lib/angles';
 
 interface OutputCardProps {
   content: string;
-  contentType: ContentType;
+  driver: Driver;
+  pillar: Pillar;
   count: number;
   onRegenerate: () => void;
   isLoading: boolean;
@@ -14,14 +15,16 @@ interface OutputCardProps {
 
 export default function OutputCard({
   content,
-  contentType,
+  driver,
+  pillar,
   count,
   onRegenerate,
   isLoading,
 }: OutputCardProps) {
   const [copied, setCopied] = useState(false);
 
-  const typeLabel = contentTypes.find((t) => t.id === contentType)?.label ?? '';
+  const driverLabel = drivers.find((d) => d.id === driver)?.label ?? '';
+  const pillarLabel = pillars.find((p) => p.id === pillar)?.label ?? '';
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(content);
@@ -35,7 +38,10 @@ export default function OutputCard({
       <div className="flex items-center justify-between px-4 py-3 border-b border-border">
         <div className="flex items-center gap-2">
           <span className="text-xs px-2 py-0.5 rounded bg-accent-dim text-accent font-medium">
-            {typeLabel}
+            {driverLabel}
+          </span>
+          <span className="text-xs px-2 py-0.5 rounded bg-surface-hover text-muted font-medium">
+            {pillarLabel}
           </span>
           <span className="text-xs text-muted">
             {count} script{count > 1 ? 's' : ''}

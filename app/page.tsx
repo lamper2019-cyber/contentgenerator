@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Generator from '@/components/Generator';
 import OutputCard from '@/components/OutputCard';
 import SettingsModal from '@/components/SettingsModal';
-import { ContentType, CtaMode, ToneMode, GenerateResponse } from '@/lib/types';
+import { Driver, Pillar, GenerateResponse } from '@/lib/types';
 
 export default function Home() {
   const [apiKey, setApiKey] = useState('');
@@ -13,12 +13,9 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [output, setOutput] = useState<string | null>(null);
-  const [lastContentType, setLastContentType] = useState<ContentType | null>(null);
+  const [lastDriver, setLastDriver] = useState<Driver | null>(null);
+  const [lastPillar, setLastPillar] = useState<Pillar | null>(null);
   const [lastCount, setLastCount] = useState(1);
-  const [lastProblemsPerScript, setLastProblemsPerScript] = useState(1);
-  const [lastToneMode, setLastToneMode] = useState<ToneMode>('tactical');
-  const [lastCtaMode, setLastCtaMode] = useState<CtaMode>('riven');
-  const [lastCustomCta, setLastCustomCta] = useState('');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -34,27 +31,21 @@ export default function Home() {
   }, []);
 
   const handleGenerate = useCallback(async (
-    contentType: ContentType,
-    count: number,
-    problemsPerScript: number,
-    toneMode: ToneMode,
-    ctaMode: CtaMode,
-    customCta: string
+    driver: Driver,
+    pillar: Pillar,
+    count: number
   ) => {
     setIsLoading(true);
     setError(null);
-    setLastContentType(contentType);
+    setLastDriver(driver);
+    setLastPillar(pillar);
     setLastCount(count);
-    setLastProblemsPerScript(problemsPerScript);
-    setLastToneMode(toneMode);
-    setLastCtaMode(ctaMode);
-    setLastCustomCta(customCta);
 
     try {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contentType, count, problemsPerScript, toneMode, ctaMode, customCta, apiKey }),
+        body: JSON.stringify({ driver, pillar, count, apiKey }),
       });
 
       const data: GenerateResponse = await response.json();
@@ -73,10 +64,10 @@ export default function Home() {
   }, [apiKey]);
 
   const handleRegenerate = useCallback(() => {
-    if (lastContentType) {
-      handleGenerate(lastContentType, lastCount, lastProblemsPerScript, lastToneMode, lastCtaMode, lastCustomCta);
+    if (lastDriver && lastPillar) {
+      handleGenerate(lastDriver, lastPillar, lastCount);
     }
-  }, [lastContentType, lastCount, lastProblemsPerScript, lastToneMode, lastCtaMode, lastCustomCta, handleGenerate]);
+  }, [lastDriver, lastPillar, lastCount, handleGenerate]);
 
   if (!mounted) return null;
 
@@ -99,11 +90,12 @@ export default function Home() {
             </div>
           )}
 
-          {output && lastContentType && (
+          {output && lastDriver && lastPillar && (
             <div className="mt-6">
               <OutputCard
                 content={output}
-                contentType={lastContentType}
+                driver={lastDriver}
+                pillar={lastPillar}
                 count={lastCount}
                 onRegenerate={handleRegenerate}
                 isLoading={isLoading}
@@ -115,10 +107,10 @@ export default function Home() {
             <div className="mt-16 text-center">
               <p className="text-2xl font-bold text-foreground/20 mb-2">RIVEN</p>
               <p className="text-muted text-sm">
-                Pick a content type, choose how many, and hit generate.
+                Pick your driver, choose a pillar, and hit generate.
               </p>
               <p className="text-muted/50 text-xs mt-1">
-                Your hooks + 100 problems are loaded and ready.
+                Delivery, value, problem, and hook are auto-selected for you.
               </p>
             </div>
           )}
@@ -130,7 +122,7 @@ export default function Home() {
                 <div className="w-2 h-2 rounded-full bg-accent animate-pulse-glow" style={{ animationDelay: '0.2s' }} />
                 <div className="w-2 h-2 rounded-full bg-accent animate-pulse-glow" style={{ animationDelay: '0.4s' }} />
               </div>
-              <p className="text-sm text-muted">Pulling from your hooks + problems...</p>
+              <p className="text-sm text-muted">Building your scripts...</p>
             </div>
           )}
         </div>

@@ -1,28 +1,55 @@
-import { ContentTypeOption } from './types';
+import { DriverOption, PillarOption } from './types';
 
-export const contentTypes: ContentTypeOption[] = [
+export const drivers: DriverOption[] = [
   {
-    id: 'reel',
-    label: 'Instagram Reel',
-    description: 'Short-form video script (30-60s)',
-    icon: '🎬',
+    id: 'leads',
+    label: 'Leads',
+    description: 'Get comments & free guide signups',
+    icon: '🧲',
   },
   {
-    id: 'carousel',
-    label: 'Carousel Post',
-    description: 'Multi-slide carousel (5-8 slides)',
-    icon: '📑',
+    id: 'income',
+    label: 'Income',
+    description: 'Drive toward coaching program',
+    icon: '💰',
   },
   {
-    id: 'story',
-    label: 'Story Sequence',
-    description: 'Multi-frame story (4-7 frames)',
-    icon: '📱',
+    id: 'growth',
+    label: 'Growth',
+    description: 'Reach new people who don\'t follow yet',
+    icon: '📈',
   },
   {
-    id: 'drop',
-    label: 'Drop of the Day',
-    description: 'Quick drop — 25 words or less that hit',
-    icon: '✨',
+    id: 'nurture',
+    label: 'Nurture',
+    description: 'Build trust with current followers',
+    icon: '🤝',
+  },
+];
+
+export const pillars: PillarOption[] = [
+  {
+    id: 'protein',
+    label: 'Protein',
+    description: '40g before noon, meal combos, real gram counts',
+    icon: '🥩',
+  },
+  {
+    id: 'the-nos',
+    label: 'The NOs',
+    description: 'Eliminating sugary drinks, fried food, processed carbs',
+    icon: '🚫',
+  },
+  {
+    id: 'mindset',
+    label: 'Mindset',
+    description: 'Identity, self-sabotage, quitting cycles',
+    icon: '🧠',
+  },
+  {
+    id: 'myth-busting',
+    label: 'Myth-Busting',
+    description: 'Debunking common fitness & diet beliefs',
+    icon: '💥',
   },
 ];

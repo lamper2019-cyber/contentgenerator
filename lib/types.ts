@@ -1,23 +1,36 @@
-export type ContentType = 'reel' | 'carousel' | 'story' | 'drop';
+export type Driver = 'leads' | 'income' | 'growth' | 'nurture';
 
-export type CtaMode = 'riven' | 'custom';
+export type Pillar = 'protein' | 'the-nos' | 'mindset' | 'myth-busting';
 
-export type ToneMode = 'tactical' | 'emotional';
+export type Delivery = 'face-to-camera' | 'voiceover-broll' | 'text-on-screen' | 'reaction';
 
-export interface ContentTypeOption {
-  id: ContentType;
+export type Value = 'educational' | 'relatable' | 'inspirational' | 'entertaining';
+
+export type HookType =
+  | 'conspiracy-implication'
+  | 'immediate-effects'
+  | 'relatable-symptoms'
+  | 'scientific-explanation'
+  | 'common-misconception';
+
+export interface DriverOption {
+  id: Driver;
+  label: string;
+  description: string;
+  icon: string;
+}
+
+export interface PillarOption {
+  id: Pillar;
   label: string;
   description: string;
   icon: string;
 }
 
 export interface GenerateRequest {
-  contentType: ContentType;
+  driver: Driver;
+  pillar: Pillar;
   count: number;
-  problemsPerScript: number;
-  toneMode: ToneMode;
-  ctaMode: CtaMode;
-  customCta: string;
   apiKey: string;
 }
 
