@@ -79,10 +79,15 @@ What he IS: Honest. Warm. A little funny when the moment calls for it. Protectiv
 === END VOICE ===
 
 === DELIVERY OPTIONS (you will auto-select one for each script) ===
-1. FACE TO CAMERA — Talking directly into the camera lens, like a conversation
-2. VOICEOVER + B-ROLL — Voice recorded separately, plays over footage (food prep, walking, grocery shopping, daily life)
-3. TEXT ON SCREEN — No talking. Message appears as text over video footage with background music
-4. REACTION — Responding to another piece of content (bad diet tip, fitness myth) using green screen effect
+1. FACE TO CAMERA — Sean is on screen looking directly into the camera lens, talking to the viewer like a one-on-one conversation. Write a FULL conversational script that he will say out loud while filming himself.
+2. VOICEOVER — Sean is NOT on screen. His voice is recorded separately and plays over video footage (food being prepared, someone walking, grocery shopping, daily activities). Write a FULL script that he will record as audio and lay over the footage.
+3. DAY IN THE LIFE — There is NO talking at all. The video is just footage showing moments like cooking, eating, walking, or daily routines in a POV style. A short punchy message appears as TEXT ON SCREEN while background music plays. Write ONLY a short text message of 10-15 WORDS MAX that will be displayed on screen over the footage. No full script needed. Just the text.
+4. REACTION — Sean is on screen but he's responding to another piece of content displayed behind him using a green screen effect. This could be reacting to a bad diet tip, a fitness myth, a screenshot of an article, or another video. Write a FULL script that is framed as a response to something specific. Include what the reacted-to content says or shows.
+
+CRITICAL DELIVERY RULES:
+- FACE TO CAMERA, VOICEOVER, and REACTION all get full spoken scripts (30-60 seconds).
+- DAY IN THE LIFE gets ONLY 10-15 words of on-screen text. No full script. No hook/body/CTA structure. Just the text message and a suggested visual direction.
+- When generating multiple scripts, vary the delivery types. Don't use the same delivery twice in a row.
 
 === VALUE OPTIONS (you will auto-select one for each script) ===
 1. EDUCATIONAL — Viewer learns something specific and actionable (real meal combo with gram counts, step-by-step tip)
@@ -116,7 +121,8 @@ VOICE:
 - Write EVERYTHING in Sean's voice. If it sounds like any brand could have said it, it's wrong.
 
 SCRIPT LENGTH:
-- Every script should be 30-60 seconds when spoken as an Instagram Reel.
+- Face to Camera, Voiceover, and Reaction scripts should be 30-60 seconds when spoken.
+- Day in the Life is 10-15 words of on-screen text ONLY. No spoken script.
 - Concise. No filler. No essays.
 
 === 100 PROBLEMS REFERENCE ===
@@ -154,25 +160,53 @@ RANDOMIZATION SEEDS — use these as starting points, not exact matches:
 - Start with delivery style #${deliverySeed} and vary from there
 - Start with value type #${valueSeed} and vary from there
 
-Structure EACH script EXACTLY like this:
+Structure EACH script with these labels at the top:
 
 ---
 **PROBLEM ADDRESSED:** Problem #[number] — "[quote the problem text]" (this is a label only — do NOT mention this problem directly in the script)
 **DRIVER:** ${driver.toUpperCase()}
 **PILLAR:** ${pillar.toUpperCase().replace('-', ' ')}
-**DELIVERY:** [auto-selected: Face to Camera / Voiceover + B-Roll / Text on Screen / Reaction]
+**DELIVERY:** [auto-selected: Face to Camera / Voiceover / Day in the Life / Reaction]
 **VALUE:** [auto-selected: Educational / Relatable / Inspirational / Entertaining]
 **HOOK TYPE:** [auto-selected: Conspiracy Implication / Immediate Effects / Relatable Symptoms Checklist / Scientific Explanation / Common Misconception]
 ---
 
+Then the script body depends on the DELIVERY type:
+
+**IF DELIVERY = FACE TO CAMERA:**
+Write a full conversational script Sean will say out loud on camera.
 **HOOK** (first 1-2 seconds — stop the scroll):
-[Opening line using the selected hook type, adapted for this pillar and audience]
-
-**MICRO-SOLUTION** (main tip or message — the meat of the script):
-[The core content. Address the problem WITHOUT naming it. Deliver the solution, tip, or perspective. If Protein or The NOs pillar, include REAL food examples with actual gram counts or specific swaps.]
-
+[Opening line using the selected hook type]
+**SCRIPT** (full spoken script — conversational, like talking to one person):
+[The core content. Address the problem WITHOUT naming it. 30-60 seconds spoken.]
 **CTA:**
-[Based on the driver rules above — or no CTA if Nurture/Growth]
+[Based on driver rules]
+
+**IF DELIVERY = VOICEOVER:**
+Write a full script Sean will record as audio and lay over footage.
+**HOOK** (first 1-2 seconds):
+[Opening line using the selected hook type]
+**VOICEOVER SCRIPT** (full audio script — will play over b-roll footage):
+[The core content. Address the problem WITHOUT naming it. 30-60 seconds spoken.]
+**SUGGESTED FOOTAGE:** [Brief description of what footage to show]
+**CTA:**
+[Based on driver rules]
+
+**IF DELIVERY = DAY IN THE LIFE:**
+NO full script. Just on-screen text over footage with music.
+**ON-SCREEN TEXT:** [10-15 words MAX. Short. Punchy. One message that hits.]
+**SUGGESTED VISUALS:** [Brief description of POV footage — cooking, eating, walking, daily routine moments]
+**CTA (if applicable):** [Text overlay version — keep it to a few words, or skip if Nurture/Growth]
+
+**IF DELIVERY = REACTION:**
+Write a full script framed as Sean responding to specific content on green screen.
+**REACTING TO:** [Describe what content is shown — bad diet tip, fitness myth, screenshot, video clip]
+**HOOK** (first 1-2 seconds — reaction opener):
+[Opening line reacting to the content]
+**REACTION SCRIPT** (full spoken script — responding to the content shown):
+[Sean's response. Address the problem WITHOUT naming it. Correct the myth or bad advice. 30-60 seconds spoken.]
+**CTA:**
+[Based on driver rules]
 
 ${count > 1 ? `IMPORTANT: Generate exactly ${count} separate scripts. REQUIREMENTS:
 - Each script MUST address a DIFFERENT problem (no overlapping problem numbers).
