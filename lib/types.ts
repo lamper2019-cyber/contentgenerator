@@ -29,7 +29,8 @@ export interface PillarOption {
 
 export interface GenerateRequest {
   driver: Driver;
-  pillar: Pillar;
+  pillar: Pillar | null;
+  delivery: Delivery | null;
   count: number;
   apiKey: string;
 }

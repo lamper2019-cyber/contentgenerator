@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Generator from '@/components/Generator';
 import OutputCard from '@/components/OutputCard';
 import SettingsModal from '@/components/SettingsModal';
-import { Driver, Pillar, GenerateResponse } from '@/lib/types';
+import { Driver, Pillar, Delivery, GenerateResponse } from '@/lib/types';
 
 export default function Home() {
   const [apiKey, setApiKey] = useState('');
@@ -15,6 +15,7 @@ export default function Home() {
   const [output, setOutput] = useState<string | null>(null);
   const [lastDriver, setLastDriver] = useState<Driver | null>(null);
   const [lastPillar, setLastPillar] = useState<Pillar | null>(null);
+  const [lastDelivery, setLastDelivery] = useState<Delivery | null>(null);
   const [lastCount, setLastCount] = useState(1);
   const [mounted, setMounted] = useState(false);
 
@@ -32,20 +33,22 @@ export default function Home() {
 
   const handleGenerate = useCallback(async (
     driver: Driver,
-    pillar: Pillar,
+    pillar: Pillar | null,
+    delivery: Delivery | null,
     count: number
   ) => {
     setIsLoading(true);
     setError(null);
     setLastDriver(driver);
     setLastPillar(pillar);
+    setLastDelivery(delivery);
     setLastCount(count);
 
     try {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ driver, pillar, count, apiKey }),
+        body: JSON.stringify({ driver, pillar, delivery, count, apiKey }),
       });
 
       const data: GenerateResponse = await response.json();
@@ -64,10 +67,10 @@ export default function Home() {
   }, [apiKey]);
 
   const handleRegenerate = useCallback(() => {
-    if (lastDriver && lastPillar) {
-      handleGenerate(lastDriver, lastPillar, lastCount);
+    if (lastDriver) {
+      handleGenerate(lastDriver, lastPillar, lastDelivery, lastCount);
     }
-  }, [lastDriver, lastPillar, lastCount, handleGenerate]);
+  }, [lastDriver, lastPillar, lastDelivery, lastCount, handleGenerate]);
 
   if (!mounted) return null;
 
@@ -90,7 +93,7 @@ export default function Home() {
             </div>
           )}
 
-          {output && lastDriver && lastPillar && (
+          {output && lastDriver && (
             <div className="mt-6">
               <OutputCard
                 content={output}
@@ -107,10 +110,10 @@ export default function Home() {
             <div className="mt-16 text-center">
               <p className="text-2xl font-bold text-foreground/20 mb-2">RIVEN</p>
               <p className="text-muted text-sm">
-                Pick your driver, choose a pillar, and hit generate.
+                Pick your driver and hit generate.
               </p>
               <p className="text-muted/50 text-xs mt-1">
-                Delivery, value, problem, and hook are auto-selected for you.
+                Pillar and delivery can be auto or chosen. Everything else is random.
               </p>
             </div>
           )}

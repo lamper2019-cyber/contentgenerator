@@ -7,7 +7,7 @@ import { GenerateRequest } from '@/lib/types';
 export async function POST(request: NextRequest) {
   try {
     const body: GenerateRequest = await request.json();
-    const { driver, pillar, count, apiKey } = body;
+    const { driver, pillar, delivery, count, apiKey } = body;
 
     if (!apiKey) {
       return NextResponse.json(
@@ -16,9 +16,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!driver || !pillar || !count) {
+    if (!driver || !count) {
       return NextResponse.json(
-        { error: 'Driver, pillar, and count are required.' },
+        { error: 'Driver and count are required.' },
         { status: 400 }
       );
     }
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     const client = new Anthropic({ apiKey });
 
     const systemPrompt = buildSystemPrompt(hooks, problems, pitches);
-    const userPrompt = buildUserPrompt(driver, pillar, count);
+    const userPrompt = buildUserPrompt(driver, pillar || null, delivery || null, count);
 
     const maxTokens = count > 2 ? 4096 : 2048;
 

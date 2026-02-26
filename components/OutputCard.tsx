@@ -7,7 +7,7 @@ import { drivers, pillars } from '@/lib/angles';
 interface OutputCardProps {
   content: string;
   driver: Driver;
-  pillar: Pillar;
+  pillar: Pillar | null;
   count: number;
   onRegenerate: () => void;
   isLoading: boolean;
@@ -24,7 +24,7 @@ export default function OutputCard({
   const [copied, setCopied] = useState(false);
 
   const driverLabel = drivers.find((d) => d.id === driver)?.label ?? '';
-  const pillarLabel = pillars.find((p) => p.id === pillar)?.label ?? '';
+  const pillarLabel = pillar ? pillars.find((p) => p.id === pillar)?.label ?? '' : 'Auto';
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(content);

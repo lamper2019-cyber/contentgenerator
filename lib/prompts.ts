@@ -1,4 +1,4 @@
-import { Driver, Pillar } from './types';
+import { Driver, Pillar, Delivery } from './types';
 
 const DRIVER_LABELS: Record<Driver, string> = {
   leads: 'LEADS — Get people to comment and join the free guide funnel',
@@ -131,14 +131,31 @@ ${problems}
 === END PROBLEMS ===`;
 }
 
+const DELIVERY_NAMES: Record<Delivery, string> = {
+  'face-to-camera': 'Face to Camera',
+  'montage': 'Montage',
+  'day-in-the-life': 'Day in the Life',
+  'reaction': 'Reaction',
+};
+
 export function buildUserPrompt(
   driver: Driver,
-  pillar: Pillar,
+  pillar: Pillar | null,
+  delivery: Delivery | null,
   count: number
 ): string {
   const driverLabel = DRIVER_LABELS[driver];
   const ctaRule = CTA_RULES[driver];
-  const pillarDetail = PILLAR_DETAILS[pillar];
+
+  // Pillar: user-chosen or auto
+  const pillarBlock = pillar
+    ? PILLAR_DETAILS[pillar]
+    : `PILLAR: AUTO — Pick the best pillar for each script from: Protein, The NOs, Mindset, or Myth-Busting. Vary across scripts if generating multiple. Use your judgment based on the problem selected.`;
+
+  // Delivery: user-chosen or auto
+  const deliveryBlock = delivery
+    ? `DELIVERY (LOCKED): ${DELIVERY_NAMES[delivery]} — ALL scripts must use this delivery type.`
+    : `DELIVERY: AUTO — Pick the best delivery for each script. Vary across scripts. Don't use the same delivery twice in a row.`;
 
   // Random seeds to force variety
   const problemSeed = Math.floor(Math.random() * 100) + 1;
@@ -148,10 +165,15 @@ export function buildUserPrompt(
 
   const plural = count > 1 ? 'scripts' : 'script';
 
+  const pillarLabel = pillar ? pillar.toUpperCase().replace('-', ' ') : '[auto-selected]';
+  const deliveryLabel = delivery ? DELIVERY_NAMES[delivery] : '[auto-selected: Face to Camera / Montage / Day in the Life / Reaction]';
+
   return `Generate ${count} Instagram Reel ${plural} (30-60 seconds each).
 
 DRIVER: ${driverLabel}
-${pillarDetail}
+${pillarBlock}
+
+${deliveryBlock}
 
 ${ctaRule}
 
@@ -166,8 +188,8 @@ Structure EACH script with these labels at the top:
 ---
 **PROBLEM ADDRESSED:** Problem #[number] — "[quote the problem text]" (this is a label only — do NOT mention this problem directly in the script)
 **DRIVER:** ${driver.toUpperCase()}
-**PILLAR:** ${pillar.toUpperCase().replace('-', ' ')}
-**DELIVERY:** [auto-selected: Face to Camera / Montage / Day in the Life / Reaction]
+**PILLAR:** ${pillarLabel}
+**DELIVERY:** ${deliveryLabel}
 **VALUE:** [auto-selected: Educational / Relatable / Inspirational / Entertaining]
 **HOOK TYPE:** [auto-selected: Conspiracy Implication / Immediate Effects / Relatable Symptoms Checklist / Scientific Explanation / Common Misconception]
 ---
@@ -213,12 +235,12 @@ Write a full script framed as Sean responding to specific content on green scree
 ${count > 1 ? `IMPORTANT: Generate exactly ${count} separate scripts. REQUIREMENTS:
 - Each script MUST address a DIFFERENT problem (no overlapping problem numbers).
 - Each script MUST use a DIFFERENT hook type. Rotate across all 5.
-- NEVER use the same Delivery + Value combination two scripts in a row.
+- NEVER use the same Delivery + Value combination two scripts in a row.${delivery ? `\n- ALL scripts must use ${DELIVERY_NAMES[delivery]} delivery since it was manually selected.` : ''}${pillar ? '' : '\n- Vary the pillar across scripts when possible.'}
 - Clearly separate each script with:
 
 ===
 
-Number each script (Script 1, Script 2, etc.)` : `Generate 1 script. Pick a problem starting near #${problemSeed}. Auto-select a delivery style, value type, and hook type.`}
+Number each script (Script 1, Script 2, etc.)` : `Generate 1 script. Pick a problem starting near #${problemSeed}. ${delivery ? `Use ${DELIVERY_NAMES[delivery]} delivery.` : 'Auto-select a delivery style.'} ${pillar ? '' : 'Auto-select a pillar.'} Auto-select a value type and hook type.`}
 
 Write in Sean's voice. Short sentences. Conversational. Direct, warm, no-BS. These are 30-60 second Reels — not essays.`;
 }
