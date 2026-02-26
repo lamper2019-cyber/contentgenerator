@@ -80,13 +80,14 @@ What he IS: Honest. Warm. A little funny when the moment calls for it. Protectiv
 
 === DELIVERY OPTIONS (you will auto-select one for each script) ===
 1. FACE TO CAMERA — Sean is on screen looking directly into the camera lens, talking to the viewer like a one-on-one conversation. Write a FULL conversational script that he will say out loud while filming himself.
-2. VOICEOVER — Sean is NOT on screen. His voice is recorded separately and plays over video footage (food being prepared, someone walking, grocery shopping, daily activities). Write a FULL script that he will record as audio and lay over the footage.
-3. DAY IN THE LIFE — There is NO talking at all. The video is just footage showing moments like cooking, eating, walking, or daily routines in a POV style. A short punchy message appears as TEXT ON SCREEN while background music plays. Write ONLY a short text message of 10-15 WORDS MAX that will be displayed on screen over the footage. No full script needed. Just the text.
+2. MONTAGE — One sentence. Clips. Music. That's it. NO talking. NO CTA. NO teaching. Just a vibe that makes someone feel seen. The video is clips of daily life (prepping food, walking, driving, living) with ONE sentence of text on screen and background music. Write ONLY that one sentence. Nothing else. This is pure emotion and identity — not education.
+3. DAY IN THE LIFE — Sean narrating over his own clips. Same pillars, same drivers, same CTAs — just delivered as a ride-along instead of teaching to camera. He's talking over footage of his actual life: morning routine, cooking, grocery shopping, eating out, walking, driving. It's a vlog-style voiceover. Write a FULL spoken script that Sean will narrate over his clips. The energy is casual — like he's bringing you along with him and dropping value while he lives his life.
 4. REACTION — Sean is on screen but he's responding to another piece of content displayed behind him using a green screen effect. This could be reacting to a bad diet tip, a fitness myth, a screenshot of an article, or another video. Write a FULL script that is framed as a response to something specific. Include what the reacted-to content says or shows.
 
 CRITICAL DELIVERY RULES:
-- FACE TO CAMERA, VOICEOVER, and REACTION all get full spoken scripts (30-60 seconds).
-- DAY IN THE LIFE gets ONLY 10-15 words of on-screen text. No full script. No hook/body/CTA structure. Just the text message and a suggested visual direction.
+- FACE TO CAMERA, DAY IN THE LIFE, and REACTION all get full spoken scripts (30-60 seconds).
+- MONTAGE gets ONLY ONE SENTENCE of on-screen text. No full script. No hook. No CTA. No teaching. Just the sentence and suggested clip ideas. It's a vibe.
+- DAY IN THE LIFE still follows the same pillar and driver rules as any other format — it's just the wrapper that changes. Sean narrates over his clips instead of talking to camera. CTAs still apply based on driver.
 - When generating multiple scripts, vary the delivery types. Don't use the same delivery twice in a row.
 
 === VALUE OPTIONS (you will auto-select one for each script) ===
@@ -121,8 +122,8 @@ VOICE:
 - Write EVERYTHING in Sean's voice. If it sounds like any brand could have said it, it's wrong.
 
 SCRIPT LENGTH:
-- Face to Camera, Voiceover, and Reaction scripts should be 30-60 seconds when spoken.
-- Day in the Life is 10-15 words of on-screen text ONLY. No spoken script.
+- Face to Camera, Day in the Life, and Reaction scripts should be 30-60 seconds when spoken.
+- Montage is ONE SENTENCE of on-screen text. That's it. No spoken script.
 - Concise. No filler. No essays.
 
 === 100 PROBLEMS REFERENCE ===
@@ -166,7 +167,7 @@ Structure EACH script with these labels at the top:
 **PROBLEM ADDRESSED:** Problem #[number] — "[quote the problem text]" (this is a label only — do NOT mention this problem directly in the script)
 **DRIVER:** ${driver.toUpperCase()}
 **PILLAR:** ${pillar.toUpperCase().replace('-', ' ')}
-**DELIVERY:** [auto-selected: Face to Camera / Voiceover / Day in the Life / Reaction]
+**DELIVERY:** [auto-selected: Face to Camera / Montage / Day in the Life / Reaction]
 **VALUE:** [auto-selected: Educational / Relatable / Inspirational / Entertaining]
 **HOOK TYPE:** [auto-selected: Conspiracy Implication / Immediate Effects / Relatable Symptoms Checklist / Scientific Explanation / Common Misconception]
 ---
@@ -182,21 +183,22 @@ Write a full conversational script Sean will say out loud on camera.
 **CTA:**
 [Based on driver rules]
 
-**IF DELIVERY = VOICEOVER:**
-Write a full script Sean will record as audio and lay over footage.
-**HOOK** (first 1-2 seconds):
-[Opening line using the selected hook type]
-**VOICEOVER SCRIPT** (full audio script — will play over b-roll footage):
-[The core content. Address the problem WITHOUT naming it. 30-60 seconds spoken.]
-**SUGGESTED FOOTAGE:** [Brief description of what footage to show]
-**CTA:**
-[Based on driver rules]
+**IF DELIVERY = MONTAGE:**
+NO full script. NO CTA. NO teaching. Just a vibe.
+**ON-SCREEN TEXT:** [ONE sentence. That's it. Make it hit. Make her feel seen. Pure emotion and identity.]
+**SUGGESTED CLIPS:** [Brief list of clip ideas — prepping food, walking, driving, living life, morning routine, etc.]
+**MUSIC VIBE:** [One-word or short description of the music energy — e.g. "cinematic," "lo-fi," "motivational," "reflective"]
+(No CTA for Montage — ever. Regardless of driver. Montage is just a vibe.)
 
 **IF DELIVERY = DAY IN THE LIFE:**
-NO full script. Just on-screen text over footage with music.
-**ON-SCREEN TEXT:** [10-15 words MAX. Short. Punchy. One message that hits.]
-**SUGGESTED VISUALS:** [Brief description of POV footage — cooking, eating, walking, daily routine moments]
-**CTA (if applicable):** [Text overlay version — keep it to a few words, or skip if Nurture/Growth]
+Sean narrating over his own clips. Ride-along energy. Full spoken script.
+**HOOK** (first 1-2 seconds):
+[Opening line using the selected hook type — casual, like he's starting a vlog]
+**NARRATION SCRIPT** (full spoken script — Sean talking over footage of his day):
+[The core content. Casual ride-along energy. Like he's bringing you with him. Address the problem WITHOUT naming it. Same pillar rules apply — if Protein or The NOs, include real food examples with gram counts. 30-60 seconds spoken.]
+**SUGGESTED CLIPS:** [What footage to show while he narrates — morning routine, cooking, grocery store, restaurant, walking, car, etc.]
+**CTA:**
+[Based on driver rules — Day in the Life still follows CTA rules like any other delivery]
 
 **IF DELIVERY = REACTION:**
 Write a full script framed as Sean responding to specific content on green screen.

@@ -2,7 +2,7 @@ export type Driver = 'leads' | 'income' | 'growth' | 'nurture';
 
 export type Pillar = 'protein' | 'the-nos' | 'mindset' | 'myth-busting';
 
-export type Delivery = 'face-to-camera' | 'voiceover' | 'day-in-the-life' | 'reaction';
+export type Delivery = 'face-to-camera' | 'montage' | 'day-in-the-life' | 'reaction';
 
 export type Value = 'educational' | 'relatable' | 'inspirational' | 'entertaining';
 
