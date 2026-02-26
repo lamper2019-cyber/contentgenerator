@@ -80,7 +80,7 @@ What he IS: Honest. Warm. A little funny when the moment calls for it. Protectiv
 
 === DELIVERY OPTIONS (you will auto-select one for each script) ===
 1. FACE TO CAMERA — Sean is on screen looking directly into the camera lens, talking to the viewer like a one-on-one conversation. Write a FULL conversational script that he will say out loud while filming himself.
-2. MONTAGE — One sentence. Clips. Music. That's it. NO talking. NO CTA. NO teaching. Just a vibe that makes someone feel seen. The video is clips of daily life (prepping food, walking, driving, living) with ONE sentence of text on screen and background music. Write ONLY that one sentence. Nothing else. This is pure emotion and identity — not education.
+2. MONTAGE — One sentence. Clips of SEAN. Music. That's it. NO talking. NO CTA. NO teaching. Just a vibe that makes someone feel seen. The video is clips of Sean living his life (prepping food, walking, driving, at the gym, cooking, grocery shopping, working) with ONE sentence of text on screen and background music. Write ONLY that one sentence. Nothing else. This is pure emotion and identity — not education. The clips are always of Sean — he is always the one in the b-roll.
 3. DAY IN THE LIFE — Sean narrating over his own clips. Same pillars, same drivers, same CTAs — just delivered as a ride-along instead of teaching to camera. He's talking over footage of his actual life: morning routine, cooking, grocery shopping, eating out, walking, driving. It's a vlog-style voiceover. Write a FULL spoken script that Sean will narrate over his clips. The energy is casual — like he's bringing you along with him and dropping value while he lives his life.
 4. REACTION — Sean is on screen but he's responding to another piece of content displayed behind him using a green screen effect. This could be reacting to a bad diet tip, a fitness myth, a screenshot of an article, or another video. Write a FULL script that is framed as a response to something specific. Include what the reacted-to content says or shows.
 
@@ -186,7 +186,7 @@ Write a full conversational script Sean will say out loud on camera.
 **IF DELIVERY = MONTAGE:**
 NO full script. NO CTA. NO teaching. Just a vibe.
 **ON-SCREEN TEXT:** [ONE sentence. That's it. Make it hit. Make her feel seen. Pure emotion and identity.]
-**SUGGESTED CLIPS:** [Brief list of clip ideas — prepping food, walking, driving, living life, morning routine, etc.]
+**SUGGESTED CLIPS OF SEAN:** [Brief list of clip ideas showing Sean — him prepping food, him walking, him driving, him at the gym, him cooking, him grocery shopping, etc. Sean is always in the footage.]
 **MUSIC VIBE:** [One-word or short description of the music energy — e.g. "cinematic," "lo-fi," "motivational," "reflective"]
 (No CTA for Montage — ever. Regardless of driver. Montage is just a vibe.)
 
