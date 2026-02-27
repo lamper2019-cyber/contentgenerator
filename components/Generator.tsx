@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { drivers, pillars } from '@/lib/angles';
 import { Driver, Pillar, Delivery } from '@/lib/types';
 
@@ -32,6 +32,8 @@ export default function Generator({
   const [deliveryMode, setDeliveryMode] = useState<'auto' | 'choose'>('auto');
   const [selectedDelivery, setSelectedDelivery] = useState<Delivery | null>(null);
   const [count, setCount] = useState(1);
+  const [btnAnimating, setBtnAnimating] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   const canGenerate =
     selectedDriver &&
@@ -42,6 +44,8 @@ export default function Generator({
 
   const handleGenerate = () => {
     if (canGenerate) {
+      setBtnAnimating(true);
+      setTimeout(() => setBtnAnimating(false), 600);
       onGenerate(
         selectedDriver,
         pillarMode === 'auto' ? null : selectedPillar,
@@ -54,7 +58,7 @@ export default function Generator({
   return (
     <div className="flex flex-col gap-6 p-4">
       {/* Driver Selector — always required */}
-      <div>
+      <div className="animate-fade-in">
         <label className="text-xs font-medium text-muted uppercase tracking-wider">
           Driver — What&apos;s the goal?
         </label>
@@ -63,9 +67,9 @@ export default function Generator({
             <button
               key={d.id}
               onClick={() => setSelectedDriver(d.id)}
-              className={`text-left p-4 rounded-xl border-2 transition-all ${
+              className={`text-left p-4 rounded-xl border-2 transition-all duration-200 hover-lift press-scale ${
                 selectedDriver === d.id
-                  ? 'border-accent bg-accent-dim text-foreground scale-[1.02]'
+                  ? 'border-accent bg-accent-dim text-foreground'
                   : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
               }`}
             >
@@ -78,7 +82,7 @@ export default function Generator({
       </div>
 
       {/* Pillar — toggleable */}
-      <div>
+      <div className="animate-fade-in-delay-1">
         <div className="flex items-center justify-between">
           <label className="text-xs font-medium text-muted uppercase tracking-wider">
             Pillar — What&apos;s it about?
@@ -88,25 +92,25 @@ export default function Generator({
               setPillarMode(pillarMode === 'auto' ? 'choose' : 'auto');
               if (pillarMode === 'choose') setSelectedPillar(null);
             }}
-            className="flex items-center gap-1.5 text-xs font-medium transition-colors"
+            className="flex items-center gap-1.5 text-xs font-medium transition-colors press-scale"
           >
-            <div className={`relative w-8 h-4.5 rounded-full transition-colors ${pillarMode === 'choose' ? 'bg-accent' : 'bg-border'}`}>
-              <div className={`absolute top-0.5 w-3.5 h-3.5 rounded-full bg-white transition-all ${pillarMode === 'choose' ? 'left-4' : 'left-0.5'}`} />
+            <div className={`relative w-8 h-4.5 rounded-full transition-colors duration-200 ${pillarMode === 'choose' ? 'bg-accent' : 'bg-border'}`}>
+              <div className={`absolute top-0.5 w-3.5 h-3.5 rounded-full bg-white transition-all duration-200 ${pillarMode === 'choose' ? 'left-4' : 'left-0.5'}`} />
             </div>
-            <span className={pillarMode === 'choose' ? 'text-accent' : 'text-muted'}>
+            <span className={`transition-colors duration-200 ${pillarMode === 'choose' ? 'text-accent' : 'text-muted'}`}>
               {pillarMode === 'choose' ? 'Choose' : 'Auto'}
             </span>
           </button>
         </div>
         {pillarMode === 'choose' ? (
-          <div className="grid grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-2 gap-3 mt-3 animate-fade-in">
             {pillars.map((p) => (
               <button
                 key={p.id}
                 onClick={() => setSelectedPillar(p.id)}
-                className={`text-left p-4 rounded-xl border-2 transition-all ${
+                className={`text-left p-4 rounded-xl border-2 transition-all duration-200 hover-lift press-scale ${
                   selectedPillar === p.id
-                    ? 'border-accent bg-accent-dim text-foreground scale-[1.02]'
+                    ? 'border-accent bg-accent-dim text-foreground'
                     : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
                 }`}
               >
@@ -117,12 +121,12 @@ export default function Generator({
             ))}
           </div>
         ) : (
-          <p className="text-xs text-muted mt-2">AI will pick the best pillar for each script</p>
+          <p className="text-xs text-muted mt-2 animate-fade-in">AI will pick the best pillar for each script</p>
         )}
       </div>
 
       {/* Delivery — toggleable */}
-      <div>
+      <div className="animate-fade-in-delay-2">
         <div className="flex items-center justify-between">
           <label className="text-xs font-medium text-muted uppercase tracking-wider">
             Delivery — How&apos;s it filmed?
@@ -132,25 +136,25 @@ export default function Generator({
               setDeliveryMode(deliveryMode === 'auto' ? 'choose' : 'auto');
               if (deliveryMode === 'choose') setSelectedDelivery(null);
             }}
-            className="flex items-center gap-1.5 text-xs font-medium transition-colors"
+            className="flex items-center gap-1.5 text-xs font-medium transition-colors press-scale"
           >
-            <div className={`relative w-8 h-4.5 rounded-full transition-colors ${deliveryMode === 'choose' ? 'bg-accent' : 'bg-border'}`}>
-              <div className={`absolute top-0.5 w-3.5 h-3.5 rounded-full bg-white transition-all ${deliveryMode === 'choose' ? 'left-4' : 'left-0.5'}`} />
+            <div className={`relative w-8 h-4.5 rounded-full transition-colors duration-200 ${deliveryMode === 'choose' ? 'bg-accent' : 'bg-border'}`}>
+              <div className={`absolute top-0.5 w-3.5 h-3.5 rounded-full bg-white transition-all duration-200 ${deliveryMode === 'choose' ? 'left-4' : 'left-0.5'}`} />
             </div>
-            <span className={deliveryMode === 'choose' ? 'text-accent' : 'text-muted'}>
+            <span className={`transition-colors duration-200 ${deliveryMode === 'choose' ? 'text-accent' : 'text-muted'}`}>
               {deliveryMode === 'choose' ? 'Choose' : 'Auto'}
             </span>
           </button>
         </div>
         {deliveryMode === 'choose' ? (
-          <div className="grid grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-2 gap-3 mt-3 animate-fade-in">
             {deliveryOptions.map((d) => (
               <button
                 key={d.id}
                 onClick={() => setSelectedDelivery(d.id)}
-                className={`text-left p-3 rounded-xl border-2 transition-all ${
+                className={`text-left p-3 rounded-xl border-2 transition-all duration-200 hover-lift press-scale ${
                   selectedDelivery === d.id
-                    ? 'border-accent bg-accent-dim text-foreground scale-[1.02]'
+                    ? 'border-accent bg-accent-dim text-foreground'
                     : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
                 }`}
               >
@@ -160,12 +164,12 @@ export default function Generator({
             ))}
           </div>
         ) : (
-          <p className="text-xs text-muted mt-2">AI will pick the best delivery for each script</p>
+          <p className="text-xs text-muted mt-2 animate-fade-in">AI will pick the best delivery for each script</p>
         )}
       </div>
 
       {/* Count Selector */}
-      <div>
+      <div className="animate-fade-in-delay-3">
         <label className="text-xs font-medium text-muted uppercase tracking-wider">
           How many scripts?
         </label>
@@ -174,7 +178,7 @@ export default function Generator({
             <button
               key={n}
               onClick={() => setCount(n)}
-              className={`flex-1 py-3 rounded-xl border-2 text-sm font-semibold transition-all ${
+              className={`flex-1 py-3 rounded-xl border-2 text-sm font-semibold transition-all duration-200 press-scale ${
                 count === n
                   ? 'border-accent bg-accent-dim text-foreground'
                   : 'border-border bg-surface hover:border-border-hover hover:bg-surface-hover text-muted hover:text-foreground'
@@ -187,31 +191,32 @@ export default function Generator({
       </div>
 
       {/* Generate Button */}
-      <button
-        onClick={handleGenerate}
-        disabled={!canGenerate}
-        className={`w-full py-4 rounded-xl font-semibold text-base transition-all ${
-          canGenerate
-            ? 'bg-accent hover:bg-accent-hover text-white cursor-pointer shadow-lg shadow-accent/20'
-            : 'bg-surface border-2 border-border text-muted cursor-not-allowed'
-        }`}
-      >
-        {isLoading ? (
-          <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-            Generating {count} script{count > 1 ? 's' : ''}...
-          </span>
-        ) : (
-          `Generate ${count} Script${count > 1 ? 's' : ''}`
-        )}
-      </button>
+      <div className="animate-fade-in-delay-4">
+        <button
+          ref={btnRef}
+          onClick={handleGenerate}
+          disabled={!canGenerate}
+          className={`w-full py-4 rounded-xl font-semibold text-base transition-all duration-200 ${
+            btnAnimating ? 'animate-btn-press animate-gold-pulse' : ''
+          } ${
+            canGenerate
+              ? 'bg-accent hover:bg-accent-hover text-background cursor-pointer shadow-lg shadow-accent/20 press-scale'
+              : 'bg-surface border-2 border-border text-muted cursor-not-allowed'
+          }`}
+        >
+          {isLoading ? (
+            <span className="flex items-center justify-center gap-2">
+              Crafting {count} script{count > 1 ? 's' : ''}...
+            </span>
+          ) : (
+            `Generate ${count} Script${count > 1 ? 's' : ''}`
+          )}
+        </button>
+      </div>
 
       {/* Status Messages */}
       {!hasApiKey && (
-        <p className="text-xs text-center text-muted">
+        <p className="text-xs text-center text-muted animate-fade-in">
           <button onClick={onSettingsClick} className="text-accent hover:underline">
             Add your API key
           </button>{' '}

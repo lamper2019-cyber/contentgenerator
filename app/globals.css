@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0a0a0a;
-  --color-foreground: #fafafa;
-  --color-surface: #141414;
-  --color-surface-hover: #1a1a1a;
-  --color-border: #262626;
-  --color-border-hover: #383838;
-  --color-muted: #a1a1aa;
-  --color-accent: #7c3aed;
-  --color-accent-hover: #6d28d9;
-  --color-accent-dim: #7c3aed33;
+  --color-background: #0D0D0D;
+  --color-foreground: #F0EDE8;
+  --color-surface: #161616;
+  --color-surface-hover: #1C1C1C;
+  --color-border: #1F1F1F;
+  --color-border-hover: #2A2A2A;
+  --color-muted: #8A8A8A;
+  --color-accent: #C9A84C;
+  --color-accent-hover: #D4B85C;
+  --color-accent-dim: #C9A84C22;
   --color-danger: #ef4444;
-  --color-success: #22c55e;
+  --color-success: #C9A84C;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -47,7 +47,129 @@ input:focus {
   outline: none;
 }
 
-/* Loading pulse */
+/* ========== ANIMATIONS ========== */
+
+/* Page fade-in on load */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out both;
+}
+
+/* Staggered fade-in for children */
+.animate-fade-in-delay-1 { animation: fade-in 0.3s ease-out 0.05s both; }
+.animate-fade-in-delay-2 { animation: fade-in 0.3s ease-out 0.1s both; }
+.animate-fade-in-delay-3 { animation: fade-in 0.3s ease-out 0.15s both; }
+.animate-fade-in-delay-4 { animation: fade-in 0.3s ease-out 0.2s both; }
+
+/* Shimmer loading effect — gold gradient sweep */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 0%,
+    #1F1C14 25%,
+    #2A2518 50%,
+    #1F1C14 75%,
+    var(--color-surface) 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* Button press / bounce */
+@keyframes btn-press {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.animate-btn-press {
+  animation: btn-press 0.3s ease-out;
+}
+
+/* Gold pulse ripple on button */
+@keyframes gold-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(201, 168, 76, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 0.6s ease-out;
+}
+
+/* Typewriter / line-by-line fade in */
+@keyframes line-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-line-appear {
+  animation: line-fade-in 0.25s ease-out both;
+}
+
+/* Copy checkmark pop */
+@keyframes check-pop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-check-pop {
+  animation: check-pop 0.3s ease-out both;
+}
+
+/* Toast slide-up */
+@keyframes toast-slide {
+  0% { opacity: 0; transform: translateY(16px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(8px); }
+}
+
+.animate-toast {
+  animation: toast-slide 1.8s ease-out both;
+}
+
+/* Modal fade in */
+@keyframes modal-fade-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-modal-in {
+  animation: modal-fade-in 0.2s ease-out both;
+}
+
+/* Backdrop fade */
+@keyframes backdrop-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-backdrop {
+  animation: backdrop-fade 0.2s ease-out both;
+}
+
+/* Hover lift for cards/buttons on desktop */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Loading pulse (kept for compatibility) */
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
@@ -55,4 +177,10 @@ input:focus {
 
 .animate-pulse-glow {
   animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* Active press state for interactive elements */
+.press-scale:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }

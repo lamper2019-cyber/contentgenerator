@@ -38,17 +38,17 @@ export default function SettingsModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-backdrop"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-md mx-4 bg-surface border border-border rounded-xl p-6 shadow-2xl">
+      <div className="relative w-full max-w-md mx-4 bg-surface border border-border rounded-xl p-6 shadow-2xl animate-modal-in">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold">Settings</h2>
           <button
             onClick={onClose}
-            className="p-1 text-muted hover:text-foreground transition-colors"
+            className="p-1 text-muted hover:text-foreground transition-all duration-200 press-scale"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
@@ -83,7 +83,7 @@ export default function SettingsModal({
             />
             <button
               onClick={() => setShowKey(!showKey)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-foreground px-2 py-1 transition-colors"
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-foreground px-2 py-1 transition-all duration-200 press-scale"
             >
               {showKey ? 'Hide' : 'Show'}
             </button>
@@ -94,13 +94,13 @@ export default function SettingsModal({
         <div className="flex items-center justify-end gap-3 mt-6">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors"
+            className="px-4 py-2 text-sm text-muted hover:text-foreground transition-all duration-200 press-scale"
           >
             Cancel
           </button>
           <button
             onClick={handleSave}
-            className="px-4 py-2 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-lg transition-colors"
+            className="px-4 py-2 bg-accent hover:bg-accent-hover text-background text-sm font-medium rounded-lg transition-all duration-200 press-scale shadow-lg shadow-accent/20"
           >
             Save
           </button>

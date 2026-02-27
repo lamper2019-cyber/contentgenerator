@@ -6,7 +6,7 @@ interface HeaderProps {
 
 export default function Header({ onSettingsClick }: HeaderProps) {
   return (
-    <header className="flex items-center justify-between px-6 py-4 border-b border-border">
+    <header className="flex items-center justify-between px-6 py-4 border-b border-border animate-fade-in">
       <div className="flex items-center gap-3">
         <h1 className="text-xl font-bold tracking-tight">
           <span className="text-accent">RIVEN</span>
@@ -15,7 +15,7 @@ export default function Header({ onSettingsClick }: HeaderProps) {
       </div>
       <button
         onClick={onSettingsClick}
-        className="p-2 rounded-lg text-muted hover:text-foreground hover:bg-surface transition-colors"
+        className="p-2 rounded-lg text-muted hover:text-foreground hover:bg-surface-hover transition-all duration-200 hover-lift press-scale"
         aria-label="Settings"
       >
         <svg
