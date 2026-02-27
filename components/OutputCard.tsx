@@ -32,6 +32,47 @@ export default function OutputCard({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Simple markdown-to-JSX renderer
+  function renderContent(text: string) {
+    return text.split('\n').map((line, i) => {
+      const trimmed = line.trim();
+
+      // === separator between scripts
+      if (trimmed === '===') {
+        return <hr key={i} className="my-6 border-accent/30 border-t-2" />;
+      }
+
+      // --- separator for metadata block
+      if (trimmed === '---') {
+        return <hr key={i} className="my-3 border-border" />;
+      }
+
+      // Empty line
+      if (trimmed === '') {
+        return <div key={i} className="h-2" />;
+      }
+
+      // Render **bold** inline
+      const parts = line.split(/(\*\*[^*]+\*\*)/g);
+      const rendered = parts.map((part, j) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return (
+            <strong key={j} className="font-semibold text-foreground">
+              {part.slice(2, -2)}
+            </strong>
+          );
+        }
+        return <span key={j}>{part}</span>;
+      });
+
+      return (
+        <p key={i} className="leading-relaxed">
+          {rendered}
+        </p>
+      );
+    });
+  }
+
   return (
     <div className="border border-border rounded-xl bg-surface overflow-hidden">
       {/* Header */}
@@ -76,8 +117,8 @@ export default function OutputCard({
       </div>
 
       {/* Content */}
-      <div className="p-5 text-sm leading-relaxed whitespace-pre-wrap">
-        {content}
+      <div className="p-5 text-sm">
+        {renderContent(content)}
       </div>
     </div>
   );
