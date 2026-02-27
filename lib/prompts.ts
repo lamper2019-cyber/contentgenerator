@@ -197,13 +197,17 @@ Structure EACH script with these labels at the top:
 Then the script body depends on the DELIVERY type:
 
 **IF DELIVERY = FACE TO CAMERA:**
-Write a full conversational script Sean will say out loud on camera.
-**HOOK** (first 1-2 seconds — stop the scroll):
-[Opening line using the selected hook type]
-**SCRIPT** (full spoken script — conversational, like talking to one person):
-[The core content. Address the problem WITHOUT naming it. 30-60 seconds spoken.]
-**CTA:**
-[Based on driver rules]
+Concise. Punchy. 8 LINES MAX. Each line is ONE short sentence. Spaced out — one sentence per line. No paragraphs. No long explanations. She should feel the emotion in the words but the words themselves are tight.
+**SCRIPT:**
+[Line 1 — hook sentence using the selected hook type]
+[Line 2]
+[Line 3]
+[Line 4]
+[Line 5]
+[Line 6]
+[Line 7 — optional]
+[Line 8 — CTA line based on driver rules, or skip if Nurture/Growth]
+(MAX 8 lines. Each line = one sentence. Short. Punchy. Spaced out. That's it.)
 
 **IF DELIVERY = MONTAGE:**
 NO full script. NO CTA. NO teaching. Just a vibe.
@@ -223,14 +227,18 @@ Sean narrating over his own clips. Ride-along energy. Full spoken script.
 [Based on driver rules — Day in the Life still follows CTA rules like any other delivery]
 
 **IF DELIVERY = REACTION:**
-Write a full script framed as Sean responding to specific content on green screen.
+Sean responding to specific content on green screen. Same rules as Face to Camera: concise, punchy, 8 LINES MAX, one sentence per line, spaced out.
 **REACTING TO:** [Describe what content is shown — bad diet tip, fitness myth, screenshot, video clip]
-**HOOK** (first 1-2 seconds — reaction opener):
-[Opening line reacting to the content]
-**REACTION SCRIPT** (full spoken script — responding to the content shown):
-[Sean's response. Address the problem WITHOUT naming it. Correct the myth or bad advice. 30-60 seconds spoken.]
-**CTA:**
-[Based on driver rules]
+**SCRIPT:**
+[Line 1 — reaction opener to the content shown]
+[Line 2]
+[Line 3]
+[Line 4]
+[Line 5]
+[Line 6]
+[Line 7 — optional]
+[Line 8 — CTA line based on driver rules, or skip if Nurture/Growth]
+(MAX 8 lines. Each line = one sentence. Short. Punchy. Spaced out. That's it.)
 
 ${count > 1 ? `IMPORTANT: Generate exactly ${count} separate scripts. REQUIREMENTS:
 - Each script MUST address a DIFFERENT problem (no overlapping problem numbers).
