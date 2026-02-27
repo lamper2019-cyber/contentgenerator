@@ -27,7 +27,9 @@ export default function OutputCard({
   const pillarLabel = pillar ? pillars.find((p) => p.id === pillar)?.label ?? '' : 'Auto';
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(content);
+    // Strip ** markdown so it pastes clean
+    const clean = content.replace(/\*\*([^*]+)\*\*/g, '$1');
+    await navigator.clipboard.writeText(clean);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
