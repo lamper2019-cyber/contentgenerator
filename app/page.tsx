@@ -35,7 +35,8 @@ export default function Home() {
     driver: Driver,
     pillar: Pillar | null,
     delivery: Delivery | null,
-    count: number
+    count: number,
+    promoDescription?: string
   ) => {
     setIsLoading(true);
     setError(null);
@@ -49,7 +50,7 @@ export default function Home() {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ driver, pillar, delivery, count, apiKey }),
+        body: JSON.stringify({ driver, pillar, delivery, count, apiKey, promoDescription }),
       });
 
       const data: GenerateResponse = await response.json();

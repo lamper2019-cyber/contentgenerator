@@ -2,17 +2,24 @@ import { Driver, Pillar, Delivery } from './types';
 
 const DRIVER_LABELS: Record<Driver, string> = {
   leads: 'LEADS — Get people to comment and join the free guide funnel',
-  income: 'INCOME — Drive people toward the 12-week coaching program',
+  promo: 'PROMO — Weave a promotion into the content organically',
   growth: 'GROWTH — Reach new people who don\'t follow the account yet',
   nurture: 'NURTURE — Build trust and connection with current followers',
 };
 
-const CTA_RULES: Record<Driver, string> = {
+const CTA_RULES_STATIC: Record<Exclude<Driver, 'promo'>, string> = {
   leads: `CTA: End with a variation of "Comment RIVEN to get my free guide" — switch up the wording naturally each time but always direct them to comment the word RIVEN.`,
-  income: `CTA: End by directing people toward the coaching program — something like "DM me NEXT STEP to learn about my 12-week coaching program" or a natural variation.`,
   growth: `CTA: Either no CTA at all, or a simple "follow for more" — keep it light. The goal is reach, not conversion.`,
   nurture: `CTA: NO CTA. Do not include any call to action. The goal is connection and trust. Just end the script naturally.`,
 };
+
+function getCtaRule(driver: Driver, promoDescription?: string): string {
+  if (driver === 'promo') {
+    const what = promoDescription?.trim() || 'the product or offer';
+    return `CTA: End by naturally directing people toward the promoted thing. What's being promoted: "${what}". The CTA should feel organic — like Sean genuinely uses, believes in, or stands behind this. Examples: "Check the link in my bio for [thing]", "DM me [keyword] if you want the details", or a natural mention. NEVER make it feel like a scripted ad read. It should feel like Sean casually bringing up something he actually rocks with.`;
+  }
+  return CTA_RULES_STATIC[driver];
+}
 
 const PILLAR_DETAILS: Record<Pillar, string> = {
   protein: `PILLAR: PROTEIN
@@ -142,10 +149,11 @@ export function buildUserPrompt(
   driver: Driver,
   pillar: Pillar | null,
   delivery: Delivery | null,
-  count: number
+  count: number,
+  promoDescription?: string
 ): string {
   const driverLabel = DRIVER_LABELS[driver];
-  const ctaRule = CTA_RULES[driver];
+  const ctaRule = getCtaRule(driver, promoDescription);
 
   // Pillar: user-chosen or auto
   const pillarBlock = pillar
@@ -168,6 +176,11 @@ export function buildUserPrompt(
   const pillarLabel = pillar ? pillar.toUpperCase().replace('-', ' ') : '[auto-selected]';
   const deliveryLabel = delivery ? DELIVERY_NAMES[delivery] : '[auto-selected: Face to Camera / Montage / Day in the Life / Reaction]';
 
+  // Promo context block — only included when driver is promo
+  const promoBlock = driver === 'promo' && promoDescription?.trim()
+    ? `\nPROMOTION CONTEXT: Sean is promoting "${promoDescription.trim()}". This MUST be woven organically into the script — it should feel like Sean genuinely uses, believes in, or stands behind what he's promoting. The script's main value still comes from the selected pillar topic. The promotion is the natural bridge to the CTA, not the entire script. Think: 80% real value from the pillar, 20% organic mention of what he's promoting. It should NEVER feel like an ad read or a forced plug. It should feel like Sean casually bringing up something that fits into the conversation.\n`
+    : '';
+
   return `Generate ${count} Instagram Reel ${plural} (30-60 seconds each).
 
 DRIVER: ${driverLabel}
@@ -176,6 +189,7 @@ ${pillarBlock}
 ${deliveryBlock}
 
 ${ctaRule}
+${promoBlock}
 
 RANDOMIZATION SEEDS — use these as starting points, not exact matches:
 - Start near problem #${problemSeed}

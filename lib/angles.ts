@@ -8,10 +8,10 @@ export const drivers: DriverOption[] = [
     icon: '🧲',
   },
   {
-    id: 'income',
-    label: 'Income',
-    description: 'Drive toward coaching program',
-    icon: '💰',
+    id: 'promo',
+    label: 'Promo',
+    description: 'Promote anything — collabs, courses, products, people',
+    icon: '📣',
   },
   {
     id: 'growth',

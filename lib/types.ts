@@ -1,4 +1,4 @@
-export type Driver = 'leads' | 'income' | 'growth' | 'nurture';
+export type Driver = 'leads' | 'promo' | 'growth' | 'nurture';
 
 export type Pillar = 'protein' | 'the-nos' | 'mindset' | 'myth-busting';
 
@@ -33,6 +33,7 @@ export interface GenerateRequest {
   delivery: Delivery | null;
   count: number;
   apiKey: string;
+  promoDescription?: string;
 }
 
 export interface GenerateResponse {

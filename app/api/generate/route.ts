@@ -7,7 +7,7 @@ import { GenerateRequest } from '@/lib/types';
 export async function POST(request: NextRequest) {
   try {
     const body: GenerateRequest = await request.json();
-    const { driver, pillar, delivery, count, apiKey } = body;
+    const { driver, pillar, delivery, count, apiKey, promoDescription } = body;
 
     if (!apiKey) {
       return NextResponse.json(
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     const client = new Anthropic({ apiKey });
 
     const systemPrompt = buildSystemPrompt(hooks, problems, pitches);
-    const userPrompt = buildUserPrompt(driver, pillar || null, delivery || null, count);
+    const userPrompt = buildUserPrompt(driver, pillar || null, delivery || null, count, promoDescription);
 
     const maxTokens = count > 2 ? 4096 : 2048;
 

@@ -5,7 +5,7 @@ import { drivers, pillars } from '@/lib/angles';
 import { Driver, Pillar, Delivery } from '@/lib/types';
 
 interface GeneratorProps {
-  onGenerate: (driver: Driver, pillar: Pillar | null, delivery: Delivery | null, count: number) => void;
+  onGenerate: (driver: Driver, pillar: Pillar | null, delivery: Delivery | null, count: number, promoDescription?: string) => void;
   isLoading: boolean;
   hasApiKey: boolean;
   onSettingsClick: () => void;
@@ -27,6 +27,7 @@ export default function Generator({
   onSettingsClick,
 }: GeneratorProps) {
   const [selectedDriver, setSelectedDriver] = useState<Driver | null>(null);
+  const [promoDescription, setPromoDescription] = useState('');
   const [pillarMode, setPillarMode] = useState<'auto' | 'choose'>('auto');
   const [selectedPillar, setSelectedPillar] = useState<Pillar | null>(null);
   const [deliveryMode, setDeliveryMode] = useState<'auto' | 'choose'>('auto');
@@ -40,7 +41,8 @@ export default function Generator({
     hasApiKey &&
     !isLoading &&
     (pillarMode === 'auto' || selectedPillar) &&
-    (deliveryMode === 'auto' || selectedDelivery);
+    (deliveryMode === 'auto' || selectedDelivery) &&
+    (selectedDriver !== 'promo' || promoDescription.trim().length > 0);
 
   const handleGenerate = () => {
     if (canGenerate) {
@@ -50,7 +52,8 @@ export default function Generator({
         selectedDriver,
         pillarMode === 'auto' ? null : selectedPillar,
         deliveryMode === 'auto' ? null : selectedDelivery,
-        count
+        count,
+        selectedDriver === 'promo' ? promoDescription.trim() : undefined
       );
     }
   };
@@ -66,7 +69,10 @@ export default function Generator({
           {drivers.map((d) => (
             <button
               key={d.id}
-              onClick={() => setSelectedDriver(d.id)}
+              onClick={() => {
+                setSelectedDriver(d.id);
+                if (d.id !== 'promo') setPromoDescription('');
+              }}
               className={`text-left p-4 rounded-xl border-2 transition-all duration-200 hover-lift press-scale ${
                 selectedDriver === d.id
                   ? 'border-accent bg-accent-dim text-foreground'
@@ -79,6 +85,23 @@ export default function Generator({
             </button>
           ))}
         </div>
+
+        {/* Promo Description Input — only shows when Promo driver is selected */}
+        {selectedDriver === 'promo' && (
+          <div className="mt-4 animate-fade-in">
+            <label className="text-xs font-medium text-muted uppercase tracking-wider block mb-2">
+              What are you promoting?
+            </label>
+            <input
+              type="text"
+              value={promoDescription}
+              onChange={(e) => setPromoDescription(e.target.value)}
+              placeholder="e.g. BluBlock sunglasses collab, my 12-week coaching program, a friend's meal prep brand..."
+              className="w-full px-4 py-3 bg-background border border-border rounded-lg text-sm text-foreground placeholder:text-muted/50 focus:border-accent transition-colors"
+            />
+            <p className="text-xs text-muted mt-1.5">This gets woven into the script organically — not a hard sell</p>
+          </div>
+        )}
       </div>
 
       {/* Pillar — toggleable */}
