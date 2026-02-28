@@ -178,7 +178,7 @@ export function buildUserPrompt(
 
   // Promo context block — only included when driver is promo
   const promoBlock = driver === 'promo' && promoDescription?.trim()
-    ? `\nPROMOTION CONTEXT: Sean is promoting "${promoDescription.trim()}". This MUST be woven organically into the script — it should feel like Sean genuinely uses, believes in, or stands behind what he's promoting. The script still leads with the pillar topic, but the promotion gets real airtime. Think: 65% value from the pillar, 35% organic promotion woven in. The promotion should show up naturally in the body of the script — not just the CTA. Reference it, connect it to the topic, let Sean talk about why he rocks with it. It should NEVER feel like a scripted ad read, but the audience should clearly know what's being promoted by the end. Sean casually bringing up something that fits the conversation — but making sure it lands.\n`
+    ? `\nPROMOTION CONTEXT: Sean is promoting "${promoDescription.trim()}". This MUST be woven organically into the script — it should feel like Sean genuinely uses, believes in, or stands behind what he's promoting. The script still leads with the pillar topic, but the promotion gets real airtime. Think: 55% value from the pillar, 45% organic promotion woven in. The promotion should show up naturally in the body of the script — not just the CTA. Reference it, connect it to the topic, let Sean talk about why he rocks with it. It should NEVER feel like a scripted ad read, but the audience should clearly know what's being promoted by the end. Sean casually bringing up something that fits the conversation — but making sure it lands.\n`
     : '';
 
   return `Generate ${count} Instagram Reel ${plural} (30-60 seconds each).
