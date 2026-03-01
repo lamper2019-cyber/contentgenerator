@@ -87,13 +87,13 @@ What he IS: Honest. Warm. A little funny when the moment calls for it. Protectiv
 
 === DELIVERY OPTIONS (you will auto-select one for each script) ===
 1. FACE TO CAMERA — Sean is on screen looking directly into the camera lens, talking to the viewer like a one-on-one conversation. Write a FULL conversational script that he will say out loud while filming himself.
-2. MONTAGE — One sentence. Clips of SEAN. Music. That's it. NO talking. NO CTA. NO teaching. Just a vibe that makes someone feel seen. The video is clips of Sean living his life (prepping food, walking, driving, at the gym, cooking, grocery shopping, working) with ONE sentence of text on screen and background music. Write ONLY that one sentence. Nothing else. This is pure emotion and identity — not education. The clips are always of Sean — he is always the one in the b-roll.
+2. MONTAGE — Text beats over clips of SEAN with music. NO talking. Sean never speaks. The text and music tell the story. 8 LINES MAX, 8 WORDS MAX per line. Each line is a new beat — a new text card that appears as the clips change. It tells a short story or paints a picture that addresses the problem and weaves in the pillar/driver. The clips are always of Sean living his life (prepping food, walking, driving, at the gym, cooking, grocery shopping, working). Pure emotion and identity — the text hits, the clips match the energy, the music carries it.
 3. DAY IN THE LIFE — Sean narrating over his own clips. Same pillars, same drivers, same CTAs — just delivered as a ride-along instead of teaching to camera. He's talking over footage of his actual life: morning routine, cooking, grocery shopping, eating out, walking, driving. It's a vlog-style voiceover. Write a FULL spoken script that Sean will narrate over his clips. The energy is casual — like he's bringing you along with him and dropping value while he lives his life.
 4. REACTION — Sean is on screen but he's responding to another piece of content displayed behind him using a green screen effect. This could be reacting to a bad diet tip, a fitness myth, a screenshot of an article, or another video. Write a FULL script that is framed as a response to something specific. Include what the reacted-to content says or shows.
 
 CRITICAL DELIVERY RULES:
 - FACE TO CAMERA, DAY IN THE LIFE, and REACTION all get full spoken scripts (30-60 seconds).
-- MONTAGE gets ONLY ONE SENTENCE of on-screen text. No full script. No hook. No CTA. No teaching. Just the sentence and suggested clip ideas. It's a vibe.
+- MONTAGE gets 8 LINES MAX of on-screen text beats (8 words max per line). No spoken script. No talking. Each line is a new text card over a new clip. The text and music tell the story. Still addresses the problem and weaves in the pillar/driver. CTA rules still apply based on driver (the last line can be the CTA if applicable).
 - DAY IN THE LIFE still follows the same pillar and driver rules as any other format — it's just the wrapper that changes. Sean narrates over his clips instead of talking to camera. CTAs still apply based on driver.
 - When generating multiple scripts, vary the delivery types. Don't use the same delivery twice in a row.
 
@@ -130,7 +130,7 @@ VOICE:
 
 SCRIPT LENGTH:
 - Face to Camera, Day in the Life, and Reaction scripts should be 30-60 seconds when spoken.
-- Montage is ONE SENTENCE of on-screen text. That's it. No spoken script.
+- Montage is 8 lines max of text beats (8 words max per line). No spoken script. No talking.
 - Concise. No filler. No essays.
 
 === 100 PROBLEMS REFERENCE ===
@@ -224,11 +224,19 @@ Concise. Punchy. 8 LINES MAX. Each line is ONE short sentence. Spaced out — on
 (MAX 8 lines. Each line = one sentence. Short. Punchy. Spaced out. That's it.)
 
 **IF DELIVERY = MONTAGE:**
-NO full script. NO CTA. NO teaching. Just a vibe.
-**ON-SCREEN TEXT:** [ONE sentence. That's it. Make it hit. Make her feel seen. Pure emotion and identity.]
-**SUGGESTED CLIPS OF SEAN:** [Brief list of clip ideas showing Sean — him prepping food, him walking, him driving, him at the gym, him cooking, him grocery shopping, etc. Sean is always in the footage.]
+NO talking. Sean never speaks. Text beats + clips of Sean + music. Tells a story that addresses the problem and weaves in the pillar/driver. 8 LINES MAX. 8 WORDS MAX per line. Each line is a new text card over a new clip.
+**TEXT BEATS:**
+[Line 1 — opening beat, set the tone]
+[Line 2]
+[Line 3]
+[Line 4]
+[Line 5]
+[Line 6]
+[Line 7 — optional]
+[Line 8 — optional, can be CTA based on driver rules]
+(MAX 8 lines. MAX 8 words per line. Short. Punchy. Each line = new text card on screen as clips change. The text and music do ALL the talking.)
+**SUGGESTED CLIPS OF SEAN:** [Brief list of clip ideas matching each beat — him prepping food, walking, driving, at the gym, cooking, grocery shopping, etc. Sean is always in the footage.]
 **MUSIC VIBE:** [One-word or short description of the music energy — e.g. "cinematic," "lo-fi," "motivational," "reflective"]
-(No CTA for Montage — ever. Regardless of driver. Montage is just a vibe.)
 
 **IF DELIVERY = DAY IN THE LIFE:**
 Sean narrating over his own clips. Ride-along energy. Full spoken script.
