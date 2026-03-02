@@ -7,12 +7,14 @@ import { GenerateRequest } from '@/lib/types';
 export async function POST(request: NextRequest) {
   try {
     const body: GenerateRequest = await request.json();
-    const { driver, pillar, delivery, count, apiKey, promoDescription } = body;
+    const { driver, pillar, delivery, count, promoDescription } = body;
+
+    const apiKey = process.env.ANTHROPIC_API_KEY;
 
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'API key is required' },
-        { status: 400 }
+        { error: 'Server API key not configured.' },
+        { status: 500 }
       );
     }
 
@@ -55,7 +57,7 @@ export async function POST(request: NextRequest) {
 
     if (err.status === 401) {
       return NextResponse.json(
-        { error: 'Invalid API key. Check your key in settings.' },
+        { error: 'API key issue. Contact Sean.' },
         { status: 401 }
       );
     }

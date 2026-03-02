@@ -4,12 +4,9 @@ import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
 import Generator from '@/components/Generator';
 import OutputCard from '@/components/OutputCard';
-import SettingsModal from '@/components/SettingsModal';
 import { Driver, Pillar, Delivery, GenerateResponse } from '@/lib/types';
 
 export default function Home() {
-  const [apiKey, setApiKey] = useState('');
-  const [showSettings, setShowSettings] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [output, setOutput] = useState<string | null>(null);
@@ -20,15 +17,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const savedKey = localStorage.getItem('riven-api-key');
-    if (savedKey) setApiKey(savedKey);
     setMounted(true);
-    if (!savedKey) setShowSettings(true);
-  }, []);
-
-  const handleSaveApiKey = useCallback((key: string) => {
-    setApiKey(key);
-    localStorage.setItem('riven-api-key', key);
   }, []);
 
   const handleGenerate = useCallback(async (
@@ -50,7 +39,7 @@ export default function Home() {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ driver, pillar, delivery, count, apiKey, promoDescription }),
+        body: JSON.stringify({ driver, pillar, delivery, count, promoDescription }),
       });
 
       const data: GenerateResponse = await response.json();
@@ -66,7 +55,7 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
-  }, [apiKey]);
+  }, []);
 
   const handleRegenerate = useCallback(() => {
     if (lastDriver) {
@@ -78,7 +67,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen animate-fade-in">
-      <Header onSettingsClick={() => setShowSettings(true)} />
+      <Header />
 
       <main className="flex-1 overflow-y-auto">
         <div className="max-w-xl mx-auto py-8 px-4">
@@ -86,8 +75,6 @@ export default function Home() {
             <Generator
               onGenerate={handleGenerate}
               isLoading={isLoading}
-              hasApiKey={!!apiKey}
-              onSettingsClick={() => setShowSettings(true)}
             />
           </div>
 
@@ -150,13 +137,6 @@ export default function Home() {
           )}
         </div>
       </main>
-
-      <SettingsModal
-        isOpen={showSettings}
-        onClose={() => setShowSettings(false)}
-        apiKey={apiKey}
-        onSaveApiKey={handleSaveApiKey}
-      />
     </div>
   );
 }

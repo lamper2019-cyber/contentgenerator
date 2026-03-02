@@ -32,7 +32,6 @@ export interface GenerateRequest {
   pillar: Pillar | null;
   delivery: Delivery | null;
   count: number;
-  apiKey: string;
   promoDescription?: string;
 }
 

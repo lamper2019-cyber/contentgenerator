@@ -7,8 +7,6 @@ import { Driver, Pillar, Delivery } from '@/lib/types';
 interface GeneratorProps {
   onGenerate: (driver: Driver, pillar: Pillar | null, delivery: Delivery | null, count: number, promoDescription?: string) => void;
   isLoading: boolean;
-  hasApiKey: boolean;
-  onSettingsClick: () => void;
 }
 
 const countOptions = [1, 2, 3, 4];
@@ -23,8 +21,6 @@ const deliveryOptions: { id: Delivery; label: string; icon: string }[] = [
 export default function Generator({
   onGenerate,
   isLoading,
-  hasApiKey,
-  onSettingsClick,
 }: GeneratorProps) {
   const [selectedDriver, setSelectedDriver] = useState<Driver | null>(null);
   const [promoDescription, setPromoDescription] = useState('');
@@ -38,7 +34,6 @@ export default function Generator({
 
   const canGenerate =
     selectedDriver &&
-    hasApiKey &&
     !isLoading &&
     (pillarMode === 'auto' || selectedPillar) &&
     (deliveryMode === 'auto' || selectedDelivery) &&
@@ -237,15 +232,6 @@ export default function Generator({
         </button>
       </div>
 
-      {/* Status Messages */}
-      {!hasApiKey && (
-        <p className="text-xs text-center text-muted animate-fade-in">
-          <button onClick={onSettingsClick} className="text-accent hover:underline">
-            Add your API key
-          </button>{' '}
-          to start generating
-        </p>
-      )}
     </div>
   );
 }
