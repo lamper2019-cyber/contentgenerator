@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
 import Generator from '@/components/Generator';
 import OutputCard from '@/components/OutputCard';
+import SlidesSection from '@/components/SlidesSection';
 import { Driver, Pillar, Delivery, GenerateResponse } from '@/lib/types';
 
 export default function Home() {
@@ -108,6 +109,11 @@ export default function Home() {
               </p>
             </div>
           )}
+
+          {/* Slides Section */}
+          <div className="mt-10 pt-10 border-t border-border">
+            <SlidesSection />
+          </div>
 
           {isLoading && (
             <div className="mt-8 animate-fade-in">
