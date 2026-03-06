@@ -1,14 +1,14 @@
 import { Driver, Pillar, Delivery } from './types';
 
 const DRIVER_LABELS: Record<Driver, string> = {
-  leads: 'LEADS — Get people to comment and join the free guide funnel',
+  leads: 'LEADS — Get people to comment RIVEN and join the community',
   promo: 'PROMO — Weave a promotion into the content organically',
   growth: 'GROWTH — Reach new people who don\'t follow the account yet',
   nurture: 'NURTURE — Build trust and connection with current followers',
 };
 
 const CTA_RULES_STATIC: Record<Exclude<Driver, 'promo'>, string> = {
-  leads: `CTA: End with a variation of "Comment RIVEN to get my free guide" — switch up the wording naturally each time but always direct them to comment the word RIVEN.`,
+  leads: `CTA: End with a variation of "Comment RIVEN to get access to a community of women on the same path as you." Switch up the wording naturally each time — examples: "Comment RIVEN and join a community of women who are doing this together," "Drop RIVEN in the comments and I'll connect you with women who get it," "Comment RIVEN — there's a whole community of women walking this out with you." Always direct them to comment the word RIVEN. The message is always about community, sisterhood, not doing this alone.`,
   growth: `CTA: Either no CTA at all, or a simple "follow for more" — keep it light. The goal is reach, not conversion.`,
   nurture: `CTA: NO CTA. Do not include any call to action. The goal is connection and trust. Just end the script naturally.`,
 };

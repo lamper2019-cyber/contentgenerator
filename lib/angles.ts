@@ -4,7 +4,7 @@ export const drivers: DriverOption[] = [
   {
     id: 'leads',
     label: 'Leads',
-    description: 'Get comments & free guide signups',
+    description: 'Get comments & community signups',
     icon: '🧲',
   },
   {
