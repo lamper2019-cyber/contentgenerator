@@ -71,7 +71,7 @@ export default function Home() {
       <Header />
 
       <main className="flex-1 overflow-y-auto">
-        <div className="max-w-xl mx-auto py-8 px-4">
+        <div className="max-w-xl mx-auto py-6 px-4 flex flex-col gap-6">
           <div className="animate-fade-in-delay-1">
             <Generator
               onGenerate={handleGenerate}
@@ -80,13 +80,13 @@ export default function Home() {
           </div>
 
           {error && (
-            <div className="mt-4 p-4 rounded-xl border border-danger/30 bg-danger/10 text-sm text-danger animate-fade-in">
+            <div className="p-4 rounded-2xl border border-danger/30 bg-danger/10 text-sm text-danger animate-fade-in">
               {error}
             </div>
           )}
 
           {output && lastDriver && (
-            <div className="mt-6 animate-fade-in">
+            <div className="animate-fade-in">
               <OutputCard
                 content={output}
                 driver={lastDriver}
@@ -99,48 +99,48 @@ export default function Home() {
           )}
 
           {!output && !isLoading && !error && (
-            <div className="mt-16 text-center animate-fade-in-delay-2">
-              <p className="text-2xl font-bold text-foreground/20 mb-2">RIVEN</p>
+            <div className="py-12 text-center animate-fade-in-delay-2">
+              <p className="text-3xl font-extrabold text-foreground/10 mb-2 tracking-tight">RIVEN</p>
               <p className="text-muted text-sm">
                 Pick your driver and hit generate.
               </p>
-              <p className="text-muted/50 text-xs mt-1">
+              <p className="text-muted/40 text-xs mt-1">
                 Pillar and delivery can be auto or chosen. Everything else is random.
               </p>
             </div>
           )}
 
-          {/* Slides Section */}
-          <div className="mt-10 pt-10 border-t border-border">
-            <SlidesSection />
-          </div>
-
           {isLoading && (
-            <div className="mt-8 animate-fade-in">
+            <div className="animate-fade-in">
               {/* Shimmer skeleton loader */}
-              <div className="border border-border rounded-xl bg-surface overflow-hidden">
-                <div className="px-4 py-3 border-b border-border">
+              <div className="glass-card overflow-hidden">
+                <div className="px-5 py-3.5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                   <div className="flex gap-2">
-                    <div className="h-5 w-16 rounded animate-shimmer" />
-                    <div className="h-5 w-12 rounded animate-shimmer" />
+                    <div className="h-5 w-16 animate-shimmer" />
+                    <div className="h-5 w-12 animate-shimmer" />
                   </div>
                 </div>
                 <div className="p-5 space-y-3">
-                  <div className="h-4 w-full rounded animate-shimmer" />
-                  <div className="h-4 w-5/6 rounded animate-shimmer" />
-                  <div className="h-4 w-full rounded animate-shimmer" />
-                  <div className="h-4 w-4/6 rounded animate-shimmer" />
-                  <div className="h-4 w-full rounded animate-shimmer" />
-                  <div className="h-4 w-3/6 rounded animate-shimmer" />
-                  <div className="h-8 w-full rounded animate-shimmer mt-4" />
-                  <div className="h-4 w-full rounded animate-shimmer" />
-                  <div className="h-4 w-5/6 rounded animate-shimmer" />
-                  <div className="h-4 w-4/6 rounded animate-shimmer" />
+                  <div className="h-4 w-full animate-shimmer" />
+                  <div className="h-4 w-5/6 animate-shimmer" />
+                  <div className="h-4 w-full animate-shimmer" />
+                  <div className="h-4 w-4/6 animate-shimmer" />
+                  <div className="h-4 w-full animate-shimmer" />
+                  <div className="h-4 w-3/6 animate-shimmer" />
+                  <div className="h-8 w-full animate-shimmer mt-4" />
+                  <div className="h-4 w-full animate-shimmer" />
+                  <div className="h-4 w-5/6 animate-shimmer" />
+                  <div className="h-4 w-4/6 animate-shimmer" />
                 </div>
               </div>
               <p className="text-sm text-muted text-center mt-4">Crafting your scripts...</p>
             </div>
           )}
+
+          {/* Slides Section */}
+          <div className="animate-fade-in-delay-2">
+            <SlidesSection />
+          </div>
         </div>
       </main>
     </div>

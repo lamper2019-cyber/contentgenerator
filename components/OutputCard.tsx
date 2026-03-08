@@ -46,13 +46,21 @@ export default function OutputCard({
       // === separator between scripts
       if (trimmed === '===') {
         lineIndex++;
-        return <hr key={i} className="my-6 border-accent/30 border-t-2 animate-line-appear" style={{ animationDelay: `${lineIndex * 30}ms` }} />;
+        return (
+          <div key={i} className="my-6 animate-line-appear" style={{ animationDelay: `${lineIndex * 30}ms` }}>
+            <div className="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+          </div>
+        );
       }
 
       // --- separator for metadata block
       if (trimmed === '---') {
         lineIndex++;
-        return <hr key={i} className="my-3 border-border animate-line-appear" style={{ animationDelay: `${lineIndex * 30}ms` }} />;
+        return (
+          <div key={i} className="my-3 animate-line-appear" style={{ animationDelay: `${lineIndex * 30}ms` }}>
+            <div className="h-px bg-[rgba(255,255,255,0.06)]" />
+          </div>
+        );
       }
 
       // Empty line
@@ -86,24 +94,24 @@ export default function OutputCard({
 
   return (
     <>
-      <div className="border border-border rounded-xl bg-surface overflow-hidden animate-fade-in">
+      <div className="glass-card overflow-hidden animate-fade-in">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+        <div className="flex items-center justify-between px-5 py-3.5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
           <div className="flex items-center gap-2">
-            <span className="text-xs px-2 py-0.5 rounded bg-accent-dim text-accent font-medium">
+            <span className="tag text-accent bg-accent-dim border-accent/20">
               {driverLabel}
             </span>
-            <span className="text-xs px-2 py-0.5 rounded bg-surface-hover text-muted font-medium">
+            <span className="tag">
               {pillarLabel}
             </span>
             <span className="text-xs text-muted">
               {count} script{count > 1 ? 's' : ''}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md text-muted hover:text-foreground hover:bg-surface-hover transition-all duration-200 hover-lift press-scale"
+              className="btn-ghost flex items-center gap-1.5 text-xs px-3 py-1.5 !rounded-xl !bg-transparent !border-transparent hover:!bg-[rgba(255,255,255,0.06)]"
             >
               {copied ? (
                 <>
@@ -113,23 +121,23 @@ export default function OutputCard({
               ) : (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                  Copy All
+                  Copy
                 </>
               )}
             </button>
             <button
               onClick={onRegenerate}
               disabled={isLoading}
-              className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md text-muted hover:text-foreground hover:bg-surface-hover transition-all duration-200 disabled:opacity-50 hover-lift press-scale"
+              className="btn-ghost flex items-center gap-1.5 text-xs px-3 py-1.5 !rounded-xl !bg-transparent !border-transparent hover:!bg-[rgba(255,255,255,0.06)] disabled:opacity-50"
             >
               <svg className={isLoading ? 'animate-spin' : ''} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
-              Regenerate
+              Redo
             </button>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-5 text-sm">
+        <div className="p-5 text-sm text-[#c7cfdf]">
           {renderContent(content)}
         </div>
       </div>
@@ -137,7 +145,7 @@ export default function OutputCard({
       {/* Toast notification */}
       {showToast && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-toast">
-          <div className="flex items-center gap-2 px-4 py-2.5 bg-surface border border-accent/30 rounded-xl shadow-lg shadow-black/30">
+          <div className="glass-card-sm flex items-center gap-2 px-4 py-2.5 !border-accent/20 shadow-lg shadow-black/30">
             <svg className="text-accent" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
             <span className="text-sm font-medium text-foreground">Copied to clipboard</span>
           </div>
